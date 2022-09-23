@@ -9,5 +9,5 @@ export const Strings = {
   TITLE_MENU_CUSTOMIZATION: 'Personalização',
   HEADER_TITLE_SERVICES: 'Serviços',
   HEADER_TITLE_DEFINITIONS: 'Pré-definições',
-  HEADER_VLIBRAS_LABEL: 'VLIBRAS',
+  HEADER_VLIBRAS_LABEL: 'FARMALIBRAS',
 };

@@ -10,3 +10,6 @@ export { default as SignalCapture } from './SignalCapture';
 export { default as RecorderArea } from './RecorderArea';
 export { default as Customization } from './Customization';
 export { default as Tutorial } from './Tutorial';
+export { default as HomePage } from './HomePage';
+export { default as Translating } from './Translating';
+

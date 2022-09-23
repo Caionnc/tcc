@@ -8,13 +8,12 @@ import { Strings } from './strings';
 import './styles.css';
 import HomePage from 'pages/HomePage';
 
-function Home() {
+function Translating() {
   return (
     <MenuLayout title={Strings.TOOLBAR_TITLE}>
-      <HomePage/>
       <Player />
     </MenuLayout>
   );
 }
 
-export default Home;
+export default Translating;
