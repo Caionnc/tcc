@@ -1,18 +1,13 @@
-.container-home {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  --background: red;
-}
-.dictionary-container {
+.home-container {
   display: flex;
   flex-direction: column;
   flex: 1;
   width: 100%;
   justify-content: flex-start;
   margin: 0;
+  --background: #e5e5e5;
 }
-.dictionary-box {
+.home-content {
   display: flex;
   flex-direction: column;
 
@@ -20,6 +15,15 @@
   padding: 16px;
   padding-top: 0px;
   padding-bottom: 0px;
+}
+
+.home-content-title {
+  font-family: Rawline;
+  font-style: bold;
+  font-size: 16px;
+  line-height: 100%;
+
+  margin-top: 35px;
 }
 
 .dictionary-input-box {

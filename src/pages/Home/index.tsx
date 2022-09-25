@@ -31,6 +31,7 @@ import { Creators } from 'store/ducks/dictionary';
 import { Strings } from './strings';
 
 import './styles.css';
+import { Medication } from 'components';
 
 const playerService = PlayerService.getService();
 
@@ -58,8 +59,10 @@ function HomePage() {
       title={Strings.TOOLBAR_TITLE}
       mode={location.pathname === paths.DICTIONARY ? 'menu' : 'menu'}
     >
-      <IonContent>
-        <div className="dictionary-container">
+      <IonContent class="home-container">
+        <div className="home-content">
+          <IonText class="home-content-title">Medicação</IonText>
+          <Medication></Medication>
         </div>
       </IonContent>
     </MenuLayout>
