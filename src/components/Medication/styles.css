@@ -13,14 +13,28 @@
   height: 60px;
 
   margin-top: 20px;
-
+  margin-bottom: 20px;
 }
 
-.medication-texts{
+.medication-texts {
   display: flex;
   flex-direction: column;
   gap: 0px;
+}
 
+.medication-texts-title {
+  font-family: Rawline;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 125%;
+}
+.medication-texts-subtitle {
+  font-family: Rawline;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 125%;
 }
 
 .tutorial-row {

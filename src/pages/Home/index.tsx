@@ -9,6 +9,11 @@ import {
   IonText,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
+  IonIcon,
+  IonImg,
+  IonBackButton,
+  IonButton,
+  IonFooter,
 } from '@ionic/react';
 import { debounce } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,6 +37,7 @@ import { Strings } from './strings';
 
 import './styles.css';
 import { Medication } from 'components';
+import { logoAddPillIcon, logoAddPillIconAllBlue } from 'assets';
 
 const playerService = PlayerService.getService();
 
@@ -63,8 +69,12 @@ function HomePage() {
         <div className="home-content">
           <IonText class="home-content-title">Medicação</IonText>
           <Medication></Medication>
+          <button className="home-add-medicine-button">
+            <img src={logoAddPillIconAllBlue}></img>
+          </button>
         </div>
       </IonContent>
+      <IonFooter class="home-bottom-container"></IonFooter>
     </MenuLayout>
   );
 }
