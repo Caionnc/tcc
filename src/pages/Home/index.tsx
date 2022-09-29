@@ -36,7 +36,7 @@ import { Creators } from 'store/ducks/dictionary';
 import { Strings } from './strings';
 
 import './styles.css';
-import { Medication } from 'components';
+import { Medication, MedicationList } from 'components';
 import { logoAddPillIcon, logoAddPillIconAllBlue } from 'assets';
 
 const playerService = PlayerService.getService();
@@ -74,7 +74,9 @@ function HomePage() {
           </button>
         </div>
       </IonContent>
-      <IonFooter class="home-bottom-container"></IonFooter>
+      <IonFooter class="home-bottom-container">
+        <IonButton>Traduzir</IonButton>
+      </IonFooter>
     </MenuLayout>
   );
 }
