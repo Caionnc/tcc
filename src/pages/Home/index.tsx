@@ -37,21 +37,48 @@ import { Strings } from './strings';
 
 import './styles.css';
 import { Medication, MedicationList } from 'components';
-import { logoAddPillIcon, logoAddPillIconAllBlue } from 'assets';
+import { logoAddPillIconAllBlue } from 'assets';
 
 const playerService = PlayerService.getService();
 
-const TIME_DEBOUNCE_MS = 1000;
+export interface IMedication {
+  name: any;
+  quantity: any;
+  period: any;
+  dosage: any;
+}
 
 function HomePage() {
   const [searchText, setSearchText] = useState('');
   const location = useLocation();
-
   const dispatch = useDispatch();
-
   const history = useHistory();
 
-  useEffect(() => {
+  //Medication List state
+  const [medicationList, setMedicationList] = useState<IMedication[]>([]);
+  const [medicationName, setMedicationName] = useState<any>('');
+  const [medicationQuantity, setMedicationQuantity] = useState<any>(0);
+  const [medicationPeriod, setMedicationPeriod] = useState<any>('');
+  const [medicationDosage, setMedicationDosage] = useState<any>(0);
+
+  const addMedication = (): void => {
+    const newMedication = {
+      name: medicationName,
+      quantity: medicationQuantity,
+      period: medicationPeriod,
+      dosage: medicationDosage,
+    };
+
+    setMedicationName('');
+    setMedicationQuantity(0);
+    setMedicationPeriod('');
+    setMedicationDosage(0);
+    setMedicationList([...medicationList, newMedication]);
+
+    console.log(medicationList);
+  };
+
+  /* useEffect(() => {
     dispatch(
       Creators.fetchWords.request({
         page: FIRST_PAGE_INDEX,
@@ -59,7 +86,7 @@ function HomePage() {
       }),
     );
   }, [dispatch]);
-
+ */
   return (
     <MenuLayout
       title={Strings.TOOLBAR_TITLE}
@@ -69,16 +96,32 @@ function HomePage() {
         <div className="home-content">
           <IonText class="home-content-title">Medicação</IonText>
           <Medication></Medication>
-          <button className="home-add-medicine-button">
-            <img src={logoAddPillIconAllBlue}></img>
-          </button>
+          <IonList>
+            {medicationList.map(item => (
+              <IonText>{item.name}</IonText>
+            ))}
+          </IonList>
         </div>
       </IonContent>
+      <button className="home-add-medicine-button" onClick={addMedication}>
+        <img src={logoAddPillIconAllBlue}></img>
+      </button>
       <IonFooter class="home-bottom-container">
-        <IonButton>Traduzir</IonButton>
+        <IonButton onClick={() => console.log('Traduzir bundle')}>
+          Traduzir
+        </IonButton>
       </IonFooter>
     </MenuLayout>
   );
 }
 
 export default HomePage;
+
+/* {{medicationList.map(item => (
+  <Medication
+  name={item.name}
+  quantity={item.quantity}
+  period={item.period}
+  dosage={item.dosage}
+/>
+))} */

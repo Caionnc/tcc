@@ -1,12 +1,10 @@
-import { IonImg, IonText } from '@ionic/react';
-import { logoPills, IconCloseCircle } from 'assets';
 import React from 'react';
 
 import './styles.css';
 
-const MedicationList = () => {
+const MedicationList = ({}) => {
   return (
-    <div className="medication-container">
+    <div className="medication-list-container">
       <MedicationList></MedicationList>
     </div>
   );
