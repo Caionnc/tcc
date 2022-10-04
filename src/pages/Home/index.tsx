@@ -61,6 +61,21 @@ function HomePage() {
   const [medicationPeriod, setMedicationPeriod] = useState<any>('');
   const [medicationDosage, setMedicationDosage] = useState<any>(0);
 
+  const [medicationListTest, setMedicationListTest] = useState<IMedication[]>(
+    [],
+  );
+  const [medicationNameTest, setMedicationNameTest] = useState<any>('');
+  const [medicationQuantityTest, setMedicationQuantityTest] = useState<any>(0);
+  const [medicationPeriodTest, setMedicationPeriodTest] = useState<any>('');
+  const [medicationDosageTest, setMedicationDosageTest] = useState<any>(0);
+
+  const testMedication = {
+    name: medicationNameTest,
+    quantity: medicationQuantityTest,
+    period: medicationPeriodTest,
+    dosage: medicationDosageTest,
+  };
+
   const addMedication = (): void => {
     const newMedication = {
       name: medicationName,
@@ -78,15 +93,6 @@ function HomePage() {
     console.log(medicationList);
   };
 
-  /* useEffect(() => {
-    dispatch(
-      Creators.fetchWords.request({
-        page: FIRST_PAGE_INDEX,
-        limit: MAX_PER_PAGE,
-      }),
-    );
-  }, [dispatch]);
- */
   return (
     <MenuLayout
       title={Strings.TOOLBAR_TITLE}
@@ -94,11 +100,11 @@ function HomePage() {
     >
       <IonContent class="home-container">
         <div className="home-content">
-          <IonText class="home-content-title">Medicação</IonText>
-          <Medication></Medication>
-          <IonList>
-            {medicationList.map(item => (
-              <IonText>{item.name}</IonText>
+          <IonText class="home-content-title">Medicamentos</IonText>
+          <Medication medication={testMedication}></Medication>
+          <IonList class="home-medication-list">
+            {medicationList.map((item: IMedication, key: number) => (
+              <Medication medication={item}></Medication>
             ))}
           </IonList>
         </div>

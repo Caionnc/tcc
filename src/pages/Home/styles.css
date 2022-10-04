@@ -47,6 +47,20 @@
   background: white;
 }
 
+.home-medication-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 0 0 0;
+
+  font-family: Rawline;
+  color: #1447a6;
+}
+
+.list-md{
+  background: transparent;
+}
+
 .dictionary-input-box {
   position: relative;
 }

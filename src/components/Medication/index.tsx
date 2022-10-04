@@ -1,17 +1,15 @@
 import { IonImg, IonText } from '@ionic/react';
 import { logoPills, IconCloseCircle } from 'assets';
+import { IMedication } from 'pages/Home';
 import React from 'react';
 
 import './styles.css';
 
 interface MedicationProps {
-  name: any;
-  quantity: any;
-  period: any;
-  dosage: any;
+  medication: IMedication;
 }
 
-const Medication = () => {
+const Medication = ({medication}: MedicationProps) => {
   return (
     <div className="medication-container">
       <IonImg src={logoPills}></IonImg>
