@@ -36,6 +36,11 @@
   line-height: 125%;
 }
 
+.medication-close-button{
+  background: transparent;
+  padding: 0 0 0 0;
+}
+
 .tutorial-row {
   display: flex;
   flex-direction: row;

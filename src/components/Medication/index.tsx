@@ -7,19 +7,25 @@ import './styles.css';
 
 interface MedicationProps {
   medication: IMedication;
+  deleteMedication(medicationToBeDeleted: string): void;
 }
 
-const Medication = ({medication}: MedicationProps) => {
+const Medication = ({ medication, deleteMedication }: MedicationProps) => {
   return (
     <div className="medication-container">
       <IonImg src={logoPills}></IonImg>
       <div className="medication-texts">
-        <IonText class="medication-texts-title">Remedio</IonText>
+        <IonText class="medication-texts-title">{medication.name}</IonText>
         <IonText class="medication-texts-subtitle">
-          qtde x vezes ao periodo 
+          {`${medication.quantity}` +
+            `${medication.dosage}` +
+            'vezes ao' +
+            `${medication.period}`}
         </IonText>
       </div>
-      <IconCloseCircle color="#c9c7c9" />
+      <button className="medication-close-button" onClick={() => deleteMedication(medication.name)}>
+        <IconCloseCircle color="#c9c7c9" />
+      </button>
     </div>
   );
 };

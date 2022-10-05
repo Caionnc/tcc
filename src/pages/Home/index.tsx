@@ -93,6 +93,14 @@ function HomePage() {
     console.log(medicationList);
   };
 
+  const deleteMedication = (medicationToBeDeleted: string): void => {
+    setMedicationList(
+      medicationList.filter(medication => {
+        return medication.name !== medicationToBeDeleted;
+      }),
+    );
+  };
+
   return (
     <MenuLayout
       title={Strings.TOOLBAR_TITLE}
@@ -101,10 +109,18 @@ function HomePage() {
       <IonContent class="home-container">
         <div className="home-content">
           <IonText class="home-content-title">Medicamentos</IonText>
-          <Medication medication={testMedication}></Medication>
+          <Medication
+            medication={
+              (testMedication.name,
+              testMedication.quantity,
+              testMedication.dosage,
+              testMedication.period)
+            }
+            deleteMedication={deleteMedication}
+          ></Medication>
           <IonList class="home-medication-list">
             {medicationList.map((item: IMedication, key: number) => (
-              <Medication medication={item}></Medication>
+              <Medication key={key} medication={item} deleteMedication={deleteMedication}></Medication>
             ))}
           </IonList>
         </div>
