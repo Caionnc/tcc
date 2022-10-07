@@ -36,7 +36,7 @@ import { Creators } from 'store/ducks/dictionary';
 import { Strings } from './strings';
 
 import './styles.css';
-import { Medication, MedicationList } from 'components';
+import { Medication } from 'components';
 import { logoAddPillIconAllBlue } from 'assets';
 
 const playerService = PlayerService.getService();
@@ -53,6 +53,9 @@ function HomePage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  //Medication Modal
+  //const [showModal, setShowModal] = useState(false);
 
   //Medication List state
   const [medicationList, setMedicationList] = useState<IMedication[]>([]);
@@ -120,7 +123,11 @@ function HomePage() {
           ></Medication>
           <IonList class="home-medication-list">
             {medicationList.map((item: IMedication, key: number) => (
-              <Medication key={key} medication={item} deleteMedication={deleteMedication}></Medication>
+              <Medication
+                key={key}
+                medication={item}
+                deleteMedication={deleteMedication}
+              ></Medication>
             ))}
           </IonList>
         </div>
@@ -138,12 +145,3 @@ function HomePage() {
 }
 
 export default HomePage;
-
-/* {{medicationList.map(item => (
-  <Medication
-  name={item.name}
-  quantity={item.quantity}
-  period={item.period}
-  dosage={item.dosage}
-/>
-))} */
