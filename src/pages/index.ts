@@ -11,4 +11,3 @@ export { default as RecorderArea } from './RecorderArea';
 export { default as Customization } from './Customization';
 export { default as Tutorial } from './Tutorial';
 export { default as Translating } from './Translating';
-

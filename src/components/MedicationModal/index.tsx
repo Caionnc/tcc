@@ -6,6 +6,10 @@ import { IconCloseCircle, IconThumbDown, IconThumbUp } from 'assets';
 
 import './styles.css';
 import { Strings } from './strings';
+import SelectMedication from 'components/SelectMedication';
+import SelectMedicationType from 'components/SelectMedicationType';
+import SelectMedicationPeriod from 'components/SelectMedicationPeriod';
+import SelectMedicationDosage from 'components/SelectMedicationDosage ';
 
 interface MedicationModalProps {
   show: any;
@@ -36,31 +40,17 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
             <IconCloseCircle color="#4E4E4E" />
           </button>
         </div>
-
-        <p className="modal-title"> {Strings.TITLE_MENU_MODAL} </p>
-
-        <div className="evaluation-modal-container-rating-chips">
-          <IonChip
-            class="evaluation-modal-container-rating-chips-yes"
-            onClick={handlePositiveRevision}
-          >
-            <IconThumbUp color="#4E4E4E" />
-            <IonText class="evaluation-modal-container-rating-chips-texts">
-              {Strings.CHIP_YES}
-            </IonText>
-          </IonChip>
-          <IonChip
-            class="evaluation-modal-container-rating-chips-no"
-            onClick={() => {
-              setShow(false);
-            }}
-          >
-            <IconThumbDown color="#4E4E4E" />
-            <IonText class="evaluation-modal-container-rating-chips-texts">
-              {Strings.CHIP_NO}
-            </IonText>
-          </IonChip>
+        <div className="medication-modal-selection-boxes">
+          <div className="medication-modal-selection-boxes-row">
+            <SelectMedication></SelectMedication>
+            <SelectMedicationType></SelectMedicationType>
+          </div>
+          <div className="medication-modal-selection-boxes-row">
+            <SelectMedicationPeriod></SelectMedicationPeriod>
+            <SelectMedicationDosage></SelectMedicationDosage>
+          </div>
         </div>
+        <IonChip>Salvar</IonChip>
       </IonModal>
     </div>
   );

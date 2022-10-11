@@ -31,10 +31,30 @@
   color: #FFFFFF;
 }
 
+.medication-modal-selection-boxes{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+.medication-modal-selection-boxes-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+}
+
+.item-native{
+  padding: 0px;
+}
+
 .evaluation-modal .modal-wrapper {
   border-radius: 8px;
-  height: 147px;
-  width: 283px;
+  height: 250px;
+  width: 300px;
 }
 
 .evaluation-modal .ion-page {
