@@ -3,7 +3,6 @@
   font-family: Rawline;
 }
 
-
 .medication-modal {
   font-weight: bold;
   font-size: 18px;
@@ -28,33 +27,43 @@
   background: none;
 }
 .hidden-span {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
-.medication-modal-selection-boxes{
+.medication-modal-selection-boxes {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   width: 100%;
+  padding: 15px;
 }
-.medication-modal-selection-boxes-row{
+/* .medication-modal-selection-boxes-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
   gap: 10px;
   width: 100%;
+} */
+
+.medication-modal-selection-boxes-title {
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 27px;
+  text-align: center;
+  color: #000;
+  margin-bottom: -10px;
 }
 
-.item-native{
+.item-native {
   padding: 0px;
 }
 
 .evaluation-modal .modal-wrapper {
   border-radius: 8px;
-  height: 250px;
+  height: 550px;
   width: 300px;
 }
 
@@ -71,7 +80,6 @@
   line-height: 27px;
   text-align: center;
   color: #000;
-  margin: 0 !important;
   /* margin: -45px 0px 0px 0px; */
   /*margin: 2px 0px -15px 0px;*/
 }
@@ -96,59 +104,10 @@
   background: none;
 }
 
-.evaluation-modal .ion-page{
+.evaluation-modal .ion-page {
   padding-right: 0px;
   padding-bottom: 0px;
   padding-top: 0px;
   padding-left: 0px;
 }
 
-.evaluation-modal-container-rating-chips{
-  display: flex;
-  flex:1;
-  flex-direction: row;
-  /* margin-top: 15px; */
-  margin-top: 16px;
-  background: transparent;
-  border: none;
-}
-
-.evaluation-modal-container-rating-chips-yes{
-  font-family: Rawline;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 150%;
-  /* identical to box height, or 24px */
-
-  display: flex;
-
-  color: #4E4E4E;
-  background: #FFFFFF;
-  border: 1px solid #e0e0e0;
-
-}
-.evaluation-modal-container-rating-chips-no{
-  font-family: Rawline;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 150%;
-  /* identical to box height, or 24px */
-
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-
-  color: #4E4E4E;
-  background: #FFFFFF;
-  border: 1px solid #e0e0e0;
-
-}
-.thumbs-color{
-  color: black;
-  /*fill="#4E4E4E"*/
-}
-.evaluation-modal-container-rating-chips-texts{
-  margin-left: 6px;
-}

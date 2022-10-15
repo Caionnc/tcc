@@ -1,6 +1,12 @@
 import React, { useCallback } from 'react';
 
-import { IonModal, IonText, IonChip } from '@ionic/react';
+import {
+  IonModal,
+  IonText,
+  IonChip,
+  IonTextarea,
+  IonSearchbar,
+} from '@ionic/react';
 
 import { IconCloseCircle } from 'assets';
 
@@ -40,14 +46,27 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
           </button>
         </div>
         <div className="medication-modal-selection-boxes">
-          <div className="medication-modal-selection-boxes-row">
-            <SelectMedication></SelectMedication>
-            <SelectMedicationType></SelectMedicationType>
-          </div>
-          <div className="medication-modal-selection-boxes-row">
-            <SelectMedicationPeriod></SelectMedicationPeriod>
-            <SelectMedicationDosage></SelectMedicationDosage>
-          </div>
+          <IonText class="medication-modal-selection-boxes-title">
+            Nome do medicamento
+          </IonText>
+          <IonSearchbar
+            className="dictionary-textarea"
+            placeholder="Medicamento"
+            inputmode="text"
+            searchIcon="none"
+          />
+          <IonText class="medication-modal-selection-boxes-title">
+            Frequência de uso
+          </IonText>
+          <SelectMedicationType></SelectMedicationType>
+          <IonText class="medication-modal-selection-boxes-title">
+            Duração do tratamento
+          </IonText>
+          <SelectMedicationPeriod></SelectMedicationPeriod>
+          <IonText class="medication-modal-selection-boxes-title">
+            Orientações importantes
+          </IonText>
+          <SelectMedicationDosage></SelectMedicationDosage>
         </div>
         <IonChip>Salvar</IonChip>
       </IonModal>
