@@ -2,10 +2,9 @@ import React, { useCallback } from 'react';
 
 import { IonModal, IonText, IonChip } from '@ionic/react';
 
-import { IconCloseCircle, IconThumbDown, IconThumbUp } from 'assets';
+import { IconCloseCircle } from 'assets';
 
 import './styles.css';
-import { Strings } from './strings';
 import SelectMedication from 'components/SelectMedication';
 import SelectMedicationType from 'components/SelectMedicationType';
 import SelectMedicationPeriod from 'components/SelectMedicationPeriod';
@@ -35,7 +34,7 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
       >
         <div className="medication-modal-container-close-button-container">
           <span className="hidden-span">test</span>
-          <IonText class="medication-modal">Medicação</IonText>
+          <IonText class="medication-modal">Medicamento</IonText>
           <button type="button" onClick={closeModal}>
             <IconCloseCircle color="#4E4E4E" />
           </button>

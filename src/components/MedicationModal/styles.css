@@ -37,6 +37,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
+  width: 100%;
 }
 .medication-modal-selection-boxes-row{
   display: flex;
