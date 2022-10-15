@@ -1,0 +1,11 @@
+.medication-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.medication-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}

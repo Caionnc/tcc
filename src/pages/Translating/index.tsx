@@ -6,7 +6,6 @@ import { MenuLayout } from 'layouts';
 import { Strings } from './strings';
 
 import './styles.css';
-import HomePage from 'pages/HomePage';
 
 function Translating() {
   return (

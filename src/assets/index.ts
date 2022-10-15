@@ -46,7 +46,9 @@ import IconPauseOutlined from './icons/IconPauseOutlined';
 import IconThumbs from './icons/IconThumbs';
 
 /* ----------------- Exports images -----------------------  [MA] */
-
+import logoAddPillIconAllBlue from './images/addIconPillAllBlue.png';
+import logoAddPillIcon from './images/addPillIconBlue.png';
+import logoPills from './images/IconPills.png';
 import logoAcre from './images/Acre.png';
 import logoAlagoas from './images/Alagoas.png';
 import logoAmapa from './images/Amapá.png';
@@ -121,6 +123,9 @@ export { ReactComponent as HozanaAvatar } from './images/hozana.svg';
 export { ReactComponent as ArrowLeft } from './images/arrow-left.svg';
 
 export {
+  logoAddPillIconAllBlue,
+  logoAddPillIcon,
+  logoPills,
   logoSubtitleOff,
   logoSubtitleOn,
   LogoIcaro,
