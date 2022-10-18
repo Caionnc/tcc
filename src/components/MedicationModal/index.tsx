@@ -66,7 +66,14 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
           <IonText class="medication-modal-selection-boxes-title">
             Orientações importantes
           </IonText>
-          <SelectMedicationDosage></SelectMedicationDosage>
+          <IonTextarea
+            class="medication-modal-observation-textarea"
+            placeholder={'Observações importantes!'}
+            rows={2}
+            cols={2}
+            wrap="soft"
+            required
+          />
         </div>
         <IonChip>Salvar</IonChip>
       </IonModal>
