@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   IonModal,
@@ -13,6 +14,9 @@ import { IconCloseCircle } from 'assets';
 import './styles.css';
 import SelectMedicationType from 'components/SelectMedicationType';
 import SelectMedicationPeriod from 'components/SelectMedicationPeriod';
+import { RootState } from 'store';
+import { Creators } from 'store/ducks/medication';
+import { current } from 'immer';
 
 interface MedicationModalProps {
   show: any;
@@ -20,8 +24,15 @@ interface MedicationModalProps {
 }
 
 const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
+  const dispatch = useDispatch();
+  const currentMedicationName = useSelector(
+    ({ medication }: RootState) => medication.name,
+  );
+
   const [medicationData, setMedicationData] = useState<string[]>([]);
-  const [medicationName, setMedicationName] = useState<any>('');
+  const [medicationName, setMedicationName] = useState<any>(
+    currentMedicationName,
+  );
   const [medicationFrequency, setMedicationFrequency] = useState<any>(0);
   const [medicationDuration, setMedicationDuration] = useState<any>('');
   const [medicationObservations, setMedicationObservations] = useState<any>(0);
@@ -34,8 +45,8 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
     setShow(false);
   }, [setShow]);
 
-
   const handleSaveData = () => {
+    dispatch(Creators.setCurrentMedicationName(medicationName));
     setMedicationData([...medicationData, medicationName]);
   };
 
@@ -85,7 +96,7 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
             required
           />
         </div>
-        <IonChip>Salvar</IonChip>
+        <IonChip onClick={handleSaveData}>Salvar</IonChip>
       </IonModal>
     </div>
   );
