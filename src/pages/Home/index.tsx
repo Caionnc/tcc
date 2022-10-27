@@ -54,6 +54,26 @@ function HomePage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const currentMedicationName = useSelector(
+    ({ medication }: RootState) => medication.name,
+  );
+
+  const currentMedicationFrequency = useSelector(
+    ({ medication }: RootState) => medication.frequency,
+  );
+
+  const currentMedicationDuration = useSelector(
+    ({ medication }: RootState) => medication.duration,
+  );
+
+  const currentMedicationObservations = useSelector(
+    ({ medication }: RootState) => medication.observation,
+  );
+
+  const currentMedicationData = useSelector(
+    ({ medication }: RootState) => medication.medicationData,
+  );
+
   //Medication Modal
   //const [showModal, setShowModal] = useState(false);
 
@@ -67,16 +87,16 @@ function HomePage() {
   const [medicationListTest, setMedicationListTest] = useState<IMedication[]>(
     [],
   );
-  const [medicationNameTest, setMedicationNameTest] = useState<any>('');
+  const [medicationNameTest, setMedicationNameTest] = useState<string>(currentMedicationName);
   const [medicationQuantityTest, setMedicationQuantityTest] = useState<any>(0);
   const [medicationPeriodTest, setMedicationPeriodTest] = useState<any>('');
   const [medicationDosageTest, setMedicationDosageTest] = useState<any>(0);
 
   const testMedication = {
-    name: medicationNameTest,
-    quantity: medicationQuantityTest,
-    period: medicationPeriodTest,
-    dosage: medicationDosageTest,
+    name: currentMedicationName,
+    quantity: currentMedicationFrequency,
+    period: currentMedicationDuration,
+    dosage: currentMedicationObservations,
   };
 
   const addMedication = (): void => {
@@ -114,10 +134,7 @@ function HomePage() {
           <IonText class="home-content-title">Medicamentos</IonText>
           <Medication
             medication={
-              (testMedication.name,
-              testMedication.quantity,
-              testMedication.dosage,
-              testMedication.period)
+              (testMedication)
             }
             deleteMedication={deleteMedication}
           ></Medication>

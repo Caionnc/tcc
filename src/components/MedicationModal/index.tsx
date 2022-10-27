@@ -77,7 +77,7 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
             onIonChange={e => setMedicationName(e.detail.value || '')}
           />
           <IonText class="medication-modal-selection-boxes-title">
-            Frequência de uso
+            {medicationName}
           </IonText>
           <SelectMedicationType></SelectMedicationType>
           <IonText class="medication-modal-selection-boxes-title">
@@ -97,6 +97,9 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
           />
         </div>
         <IonChip onClick={handleSaveData}>Salvar</IonChip>
+        <IonText class="medication-modal-selection-boxes-title">
+          {medicationData}
+        </IonText>
       </IonModal>
     </div>
   );

@@ -22,9 +22,9 @@ export interface MedicationState {
 
 const INITIAL_STATE: MedicationState = {
   name: "Nome do remedio",
-  frequency: "Frequência do remédio",
-  duration: "Duração do remédio",
-  observation: "Observações Importantes",
+  frequency: "Frequência",
+  duration: "Duração",
+  observation: "Observações",
   medicationData: [''],
 };
 
