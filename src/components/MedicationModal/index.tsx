@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import {
   IonModal,
@@ -11,10 +11,8 @@ import {
 import { IconCloseCircle } from 'assets';
 
 import './styles.css';
-import SelectMedication from 'components/SelectMedication';
 import SelectMedicationType from 'components/SelectMedicationType';
 import SelectMedicationPeriod from 'components/SelectMedicationPeriod';
-import SelectMedicationDosage from 'components/SelectMedicationDosage ';
 
 interface MedicationModalProps {
   show: any;
@@ -22,6 +20,12 @@ interface MedicationModalProps {
 }
 
 const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
+  const [medicationData, setMedicationData] = useState<string[]>([]);
+  const [medicationName, setMedicationName] = useState<any>('');
+  const [medicationFrequency, setMedicationFrequency] = useState<any>(0);
+  const [medicationDuration, setMedicationDuration] = useState<any>('');
+  const [medicationObservations, setMedicationObservations] = useState<any>(0);
+
   const closeModal = () => {
     setShow(false);
   };
@@ -29,6 +33,11 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
   const handlePositiveRevision = useCallback(() => {
     setShow(false);
   }, [setShow]);
+
+
+  const handleSaveData = () => {
+    setMedicationData([...medicationData, medicationName]);
+  };
 
   return (
     <div>
@@ -54,6 +63,7 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
             placeholder="Medicamento"
             inputmode="text"
             searchIcon="none"
+            onIonChange={e => setMedicationName(e.detail.value || '')}
           />
           <IonText class="medication-modal-selection-boxes-title">
             Frequência de uso
