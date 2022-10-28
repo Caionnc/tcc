@@ -2,18 +2,18 @@ import React from 'react';
 import { IonList, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
 import { medicationFrequency } from 'assets/json/index';
 
-interface SelectMedicationPeriodProps {
-  name: string;
+interface SelectMedicationDurationProps {
+  value: string;
 }
 
-function SelectMedicationPeriod() {
-  const renderMedication = (item: SelectMedicationPeriodProps) => (
-    <IonSelectOption value={item.name}>{item.name}</IonSelectOption>
+function SelectMedicationDuration() {
+  const renderMedication = (item: SelectMedicationDurationProps) => (
+    <IonSelectOption value={item.value}>{item.value}</IonSelectOption>
   );
   return (
     <IonList>
       <IonItem>
-        <IonSelect interface="popover" placeholder={'Frequência'}>
+        <IonSelect interface="popover" placeholder={'Duração'}>
           {medicationFrequency.map(item => {
             return renderMedication(item);
           })}
@@ -22,4 +22,4 @@ function SelectMedicationPeriod() {
     </IonList>
   );
 }
-export default SelectMedicationPeriod;
+export default SelectMedicationDuration;

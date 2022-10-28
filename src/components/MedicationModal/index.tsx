@@ -12,11 +12,11 @@ import {
 import { IconCloseCircle } from 'assets';
 
 import './styles.css';
-import SelectMedicationType from 'components/SelectMedicationType';
-import SelectMedicationPeriod from 'components/SelectMedicationPeriod';
+import SelectMedicationDuration from 'components/SelectMedicationDuration';
 import { RootState } from 'store';
 import { Creators } from 'store/ducks/medication';
 import { current } from 'immer';
+import SelectMedicationFrequency from 'components/SelectMedicationFrequency';
 
 interface MedicationModalProps {
   show: any;
@@ -28,14 +28,29 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
   const currentMedicationName = useSelector(
     ({ medication }: RootState) => medication.name,
   );
+  const currentMedicationFrequency = useSelector(
+    ({ medication }: RootState) => medication.frequency,
+  );
+  const currentMedicationDuration = useSelector(
+    ({ medication }: RootState) => medication.duration,
+  );
+  const currentMedicationObservations = useSelector(
+    ({ medication }: RootState) => medication.observation,
+  );
 
   const [medicationData, setMedicationData] = useState<string[]>([]);
-  const [medicationName, setMedicationName] = useState<any>(
+  const [medicationName, setMedicationName] = useState<string>(
     currentMedicationName,
   );
-  const [medicationFrequency, setMedicationFrequency] = useState<any>(0);
-  const [medicationDuration, setMedicationDuration] = useState<any>('');
-  const [medicationObservations, setMedicationObservations] = useState<any>(0);
+  const [medicationFrequency, setMedicationFrequency] = useState<string>(
+    currentMedicationFrequency,
+  );
+  const [medicationDuration, setMedicationDuration] = useState<string>(
+    currentMedicationDuration,
+  );
+  const [medicationObservations, setMedicationObservations] = useState<string>(
+    currentMedicationObservations,
+  );
 
   const closeModal = () => {
     setShow(false);
@@ -47,7 +62,19 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
 
   const handleSaveData = () => {
     dispatch(Creators.setCurrentMedicationName(medicationName));
-    setMedicationData([...medicationData, medicationName]);
+    dispatch(Creators.setCurrentMedicationFrequency(medicationFrequency));
+    dispatch(Creators.setCurrentMedicationDuration(medicationDuration));
+    dispatch(Creators.setCurrentMedicationObservations(medicationObservations));
+
+    setMedicationData([
+      ...medicationData,
+      `${
+        medicationName +
+        medicationFrequency +
+        medicationDuration +
+        medicationObservations
+      }`,
+    ]);
   };
 
   return (
@@ -79,11 +106,11 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
           <IonText class="medication-modal-selection-boxes-title">
             {medicationName}
           </IonText>
-          <SelectMedicationType></SelectMedicationType>
+          <SelectMedicationFrequency></SelectMedicationFrequency>
           <IonText class="medication-modal-selection-boxes-title">
             Duração do tratamento
           </IonText>
-          <SelectMedicationPeriod></SelectMedicationPeriod>
+          <SelectMedicationDuration></SelectMedicationDuration>
           <IonText class="medication-modal-selection-boxes-title">
             Orientações importantes
           </IonText>
@@ -94,6 +121,7 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
             cols={2}
             wrap="soft"
             required
+            onIonChange={e => setMedicationObservations(e.detail.value || '')}
           />
         </div>
         <IonChip onClick={handleSaveData}>Salvar</IonChip>

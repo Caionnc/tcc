@@ -11,5 +11,5 @@ export { default as MedicationList } from './MedicationList';
 export { default as MedicationModal } from './MedicationModal';
 export { default as SelectMedication } from './SelectMedication';
 export { default as SelectMedicationDosage } from './SelectMedicationDosage '
-export { default as SelectMedicationPeriod } from './SelectMedicationPeriod'
-export { default as SelectMedicationType } from './SelectMedicationType'
+export { default as SelectMedicationDuration } from './SelectMedicationDuration'
+export { default as SelectMedicationFrequency } from './SelectMedicationFrequency'
