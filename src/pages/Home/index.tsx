@@ -15,7 +15,7 @@ import {
   IonButton,
   IonFooter,
 } from '@ionic/react';
-import { debounce } from 'lodash';
+import { debounce, indexOf } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 
@@ -31,13 +31,12 @@ import { MenuLayout } from 'layouts';
 import { Words } from 'models/dictionary';
 import PlayerService from 'services/unity';
 import { RootState } from 'store';
-import { Creators } from 'store/ducks/dictionary';
 
 import { Strings } from './strings';
 
 import './styles.css';
 import { Medication } from 'components';
-import { IconAddFilled } from 'assets';
+import { addMedicationImg } from 'assets';
 
 const playerService = PlayerService.getService();
 
@@ -53,6 +52,10 @@ function HomePage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const currentMedicationId = useSelector(
+    ({ medication }: RootState) => medication.id,
+  );
 
   const currentMedicationName = useSelector(
     ({ medication }: RootState) => medication.name,
@@ -72,6 +75,10 @@ function HomePage() {
 
   const currentMedicationData = useSelector(
     ({ medication }: RootState) => medication.medicationData,
+  );
+
+  const currentMedicationList = useSelector(
+    ({ medication }: RootState) => medication.medicationList,
   );
 
   //Medication Modal
@@ -121,6 +128,7 @@ function HomePage() {
       frequency: currentMedicationFrequency,
       duration: currentMedicationDuration,
       observations: currentMedicationObservations,
+      id: currentMedicationId,
     };
 
     setMedicationName(currentMedicationName);
@@ -163,9 +171,11 @@ function HomePage() {
           </IonList>
         </div>
       </IonContent>
-      <button className="home-add-medicine-button" onClick={addMedication}>
-        <img src={IconAddFilled} alt="" />
-      </button>
+      <div className="home-add-medication-div">
+        <button className="home-add-medicine-button" onClick={addMedication}>
+          <img src={addMedicationImg} alt="" />
+        </button>
+      </div>
       <IonFooter class="home-bottom-container">
         <IonButton onClick={() => console.log('Traduzir bundle')}>
           Traduzir

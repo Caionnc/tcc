@@ -5,6 +5,7 @@ import { Reducer } from 'redux';
 import { createAction, ActionType } from 'typesafe-actions';
 
 export const Types = {
+  SET_CURRENT_MEDICATION_ID: '@medication/SET_CURRENT_MEDICATION_NAME',
   SET_CURRENT_MEDICATION_NAME: '@medication/SET_CURRENT_MEDICATION_NAME',
   SET_CURRENT_MEDICATION_FREQUENCY:
     '@medication/SET_CURRENT_MEDICATION_FREQUENCY',
@@ -17,6 +18,7 @@ export const Types = {
 };
 
 export interface MedicationState {
+  id: number;
   name: string;
   frequency: string;
   duration: string;
@@ -25,7 +27,17 @@ export interface MedicationState {
   medicationList: IMedication[];
 }
 
+export interface MedicationListState {
+  id: number;
+  name: string;
+  frequency: string;
+  duration: string;
+  observation: string;
+  medicationData: string[];
+}
+
 const INITIAL_STATE: MedicationState = {
+  id: 0,
   name: 'Nome do remedio',
   frequency: 'Frequência',
   duration: 'Duração',
@@ -35,6 +47,9 @@ const INITIAL_STATE: MedicationState = {
 };
 
 export const Creators = {
+  setCurrentMedicationId: createAction(
+    Types.SET_CURRENT_MEDICATION_ID,
+  )<number>(),
   setCurrentMedicationName: createAction(
     Types.SET_CURRENT_MEDICATION_NAME,
   )<string>(),
@@ -64,6 +79,9 @@ const reducer: Reducer<MedicationState, ActionTypes> = (
   const { payload, type } = action;
   return produce(state, (draft: Draft<MedicationState>) => {
     switch (type) {
+      case Types.SET_CURRENT_MEDICATION_ID:
+        draft.id = payload;
+        break;
       case Types.SET_CURRENT_MEDICATION_NAME:
         draft.name = payload;
         break;

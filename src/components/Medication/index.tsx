@@ -27,9 +27,9 @@ const Medication = ({ medication, deleteMedication }: MedicationProps) => {
       >
         <IonText class="medication-texts-title">{medication.name}</IonText>
         <IonText class="medication-texts-subtitle">
-          {`${medication.frequency}` +
-            `${medication.duration}` +
-            `${medication.observations}`}
+          {`${medication.frequency+", "}` +
+            `${medication.duration+" e "}` +
+            `${medication.observations +";"}`}
         </IonText>
       </div>
       <MedicationModal
