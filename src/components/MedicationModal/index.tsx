@@ -102,6 +102,8 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
             inputmode="text"
             searchIcon="none"
             onIonChange={e => setMedicationName(e.detail.value || '')}
+            //dispatch(Creators.setCurrentMedicationName(e.detail.value || ''));
+            //setMedicationName(e.detail.value || '')
           />
           <IonText class="medication-modal-selection-boxes-title">
             {medicationName}

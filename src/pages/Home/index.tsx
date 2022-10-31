@@ -177,14 +177,28 @@ function HomePage() {
     setMedicationList([...medicationList, newMedication]);
 
     console.log(currentMedicationList);
+    //console.log(medicationList);
   };
 
   const deleteMedication = (medicationToBeDeleted: string): void => {
-    setMedicationList(
+        //setMedicationList(currentMedicationList);
+        currentMedicationList.filter(medication => {
+          return medication.name !== medicationToBeDeleted;
+        });
+
+   /*  dispatch(
+      Creators.setCurrentMedicationList(
+        currentMedicationList.filter(medication => {
+          return medication.name !== medicationToBeDeleted;
+        }),
+      ),
+    ); */
+
+    /* setMedicationList(
       medicationList.filter(medication => {
         return medication.name !== medicationToBeDeleted;
       }),
-    );
+    ); */
   };
 
   return (
@@ -200,13 +214,15 @@ function HomePage() {
             deleteMedication={deleteMedication}
           ></Medication>
           <IonList class="home-medication-list">
-            {currentMedicationList.map((item: MedicationListState, key: number) => (
-              <Medication
-                key={key}
-                medication={item}
-                deleteMedication={deleteMedication}
-              ></Medication>
-            ))}
+            {currentMedicationList.map(
+              (item: MedicationListState, key: number) => (
+                <Medication
+                  key={key}
+                  medication={item}
+                  deleteMedication={deleteMedication}
+                ></Medication>
+              ),
+            )}
           </IonList>
         </div>
       </IonContent>
