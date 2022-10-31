@@ -95,7 +95,9 @@ function HomePage() {
   //const [showModal, setShowModal] = useState(false);
 
   //Medication List state
-  const [medicationList, setMedicationList] = useState<IMedication[]>([]);
+  const [medicationList, setMedicationList] = useState<MedicationListState[]>(
+    [],
+  );
   const [medicationName, setMedicationName] = useState<any>(
     currentMedicationName,
   );
@@ -126,14 +128,27 @@ function HomePage() {
 
   //FIXED HOME MEDICATION
   const testMedication = {
+    id: currentMedicationId,
     name: currentMedicationName,
     frequency: currentMedicationFrequency,
     duration: currentMedicationDuration,
-    observations: currentMedicationObservations,
+    observation: currentMedicationObservations,
+    medicationData: `${
+      currentMedicationId +
+      ' ' +
+      currentMedicationName +
+      ' ' +
+      currentMedicationFrequency +
+      ' ' +
+      currentMedicationDuration +
+      ' ' +
+      currentMedicationObservations +
+      ' '
+    }`,
   };
 
   const addMedication = (): void => {
-    const newMedication:MedicationListState = {
+    const newMedication: MedicationListState = {
       id: currentMedicationId,
       name: currentMedicationName,
       frequency: currentMedicationFrequency,
@@ -158,8 +173,8 @@ function HomePage() {
     setMedicationDuration(currentMedicationDuration);
     setMedicationObervations(currentMedicationObservations);
     dispatch(Creators.setCurrentMedicationList(newMedication));
-
-    //setMedicationList([...medicationList, newMedication]);
+    //only for test
+    setMedicationList([...medicationList, newMedication]);
 
     console.log(currentMedicationList);
   };
@@ -185,7 +200,7 @@ function HomePage() {
             deleteMedication={deleteMedication}
           ></Medication>
           <IonList class="home-medication-list">
-            {medicationList.map((item: IMedication, key: number) => (
+            {currentMedicationList.map((item: MedicationListState, key: number) => (
               <Medication
                 key={key}
                 medication={item}

@@ -1,13 +1,13 @@
 import { IonImg, IonText } from '@ionic/react';
 import { logoPills, IconCloseCircle } from 'assets';
 import MedicationModal from 'components/MedicationModal';
-import { IMedication } from 'pages/Home';
+import { IMedication, MedicationListState } from 'pages/Home';
 import React, { useCallback, useState } from 'react';
 
 import './styles.css';
 
 interface MedicationProps {
-  medication: IMedication;
+  medication: MedicationListState;
   deleteMedication(medicationToBeDeleted: string): void;
 }
 
@@ -29,7 +29,7 @@ const Medication = ({ medication, deleteMedication }: MedicationProps) => {
         <IonText class="medication-texts-subtitle">
           {`${medication.frequency+", "}` +
             `${medication.duration+" e "}` +
-            `${medication.observations +";"}`}
+            `${medication.observation +";"}`}
         </IonText>
       </div>
       <MedicationModal
