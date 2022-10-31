@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
+import { stat } from 'fs';
 import produce, { Draft } from 'immer';
-import { IMedication } from 'pages/Home';
 import { Reducer } from 'redux';
 import { createAction, ActionType } from 'typesafe-actions';
 
@@ -14,7 +14,9 @@ export const Types = {
   SET_CURRENT_MEDICATION_OBSERVATIONS:
     '@medication/SET_CURRENT_MEDICATION_OBSERVATIONS',
   SET_CURRENT_MEDICATION_DATA: '@medication/SET_CURRENT_MEDICATION_DATA',
+  //Medication List Getters and Setters
   SET_CURRENT_MEDICATION_LIST: '@medication/SET_CURRENT_MEDICATION_LIST',
+  GET_CURRENT_MEDICATION_LIST: '@medication/GET_CURRENT_MEDICATION_LIST',
 };
 
 export interface MedicationState {
@@ -23,8 +25,8 @@ export interface MedicationState {
   frequency: string;
   duration: string;
   observation: string;
-  medicationData: string[];
-  medicationList: IMedication[];
+  medicationData: string;
+  medicationList: MedicationListState[];
 }
 
 export interface MedicationListState {
@@ -33,7 +35,7 @@ export interface MedicationListState {
   frequency: string;
   duration: string;
   observation: string;
-  medicationData: string[];
+  medicationData: string;
 }
 
 const INITIAL_STATE: MedicationState = {
@@ -42,14 +44,14 @@ const INITIAL_STATE: MedicationState = {
   frequency: 'Frequência',
   duration: 'Duração',
   observation: 'Observações',
-  medicationData: [''],
+  medicationData: '',
   medicationList: [],
 };
 
 export const Creators = {
   setCurrentMedicationId: createAction(
     Types.SET_CURRENT_MEDICATION_ID,
-  )<number>(),
+  )<any>(),
   setCurrentMedicationName: createAction(
     Types.SET_CURRENT_MEDICATION_NAME,
   )<string>(),
@@ -68,6 +70,9 @@ export const Creators = {
   setCurrentMedicationList: createAction(
     Types.SET_CURRENT_MEDICATION_LIST,
   )<any>(),
+  /* getCurrentMedicationList: createAction(Types.GET_CURRENT_MEDICATION_LIST)<
+    IMedication[]
+  >(), */
 };
 
 export type ActionTypes = ActionType<typeof Creators>;
@@ -95,11 +100,25 @@ const reducer: Reducer<MedicationState, ActionTypes> = (
         draft.observation = payload;
         break;
       case Types.SET_CURRENT_MEDICATION_DATA:
-        draft.medicationData = [...draft.medicationData, payload];
+        draft.medicationData = payload;
         break;
       case Types.SET_CURRENT_MEDICATION_LIST:
         draft.medicationList = [...draft.medicationList, payload];
         break;
+
+      /* case Types.GET_CURRENT_MEDICATION_LIST:
+        draft.medicationList.map((item: IMedication, key: number) =>
+          console.log(
+            'Medication List Key' + key + '\n',
+            'Medication List Name' + draft.medicationList[key].name + '\n',
+            'Medication List Name' + draft.medicationList[key].frequency + '\n',
+            'Medication List Name' + draft.medicationList[key].duration + '\n',
+            'Medication List Name' +
+              draft.medicationList[key].observations +
+              '\n',
+          ),
+        );
+        break; */
 
       default:
         break;

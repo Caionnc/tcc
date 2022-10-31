@@ -37,6 +37,7 @@ import { Strings } from './strings';
 import './styles.css';
 import { Medication } from 'components';
 import { addMedicationImg } from 'assets';
+import { Creators } from 'store/ducks/medication';
 
 const playerService = PlayerService.getService();
 
@@ -45,6 +46,15 @@ export interface IMedication {
   frequency: any;
   duration: any;
   observations: any;
+}
+
+export interface MedicationListState {
+  id: number;
+  name: string;
+  frequency: string;
+  duration: string;
+  observation: string;
+  medicationData: string;
 }
 
 function HomePage() {
@@ -111,7 +121,7 @@ function HomePage() {
   const [medicationDurationTest, setMedicationDurationTest] = useState<any>(
     currentMedicationDuration,
   );
-  const [medicationObservationsTest, setMedicationDoObservationsst] =
+  const [medicationObservationsTest, setMedicationDoObservations] =
     useState<any>(currentMedicationObservations);
 
   //FIXED HOME MEDICATION
@@ -123,21 +133,35 @@ function HomePage() {
   };
 
   const addMedication = (): void => {
-    const newMedication = {
+    const newMedication:MedicationListState = {
+      id: currentMedicationId,
       name: currentMedicationName,
       frequency: currentMedicationFrequency,
       duration: currentMedicationDuration,
-      observations: currentMedicationObservations,
-      id: currentMedicationId,
+      observation: currentMedicationObservations,
+      medicationData: `${
+        currentMedicationId +
+        ' ' +
+        currentMedicationName +
+        ' ' +
+        currentMedicationFrequency +
+        ' ' +
+        currentMedicationDuration +
+        ' ' +
+        currentMedicationObservations +
+        ' '
+      }`,
     };
 
     setMedicationName(currentMedicationName);
     setmedicationFrequency(currentMedicationFrequency);
     setMedicationDuration(currentMedicationDuration);
     setMedicationObervations(currentMedicationObservations);
-    setMedicationList([...medicationList, newMedication]);
+    dispatch(Creators.setCurrentMedicationList(newMedication));
 
-    console.log(medicationList);
+    //setMedicationList([...medicationList, newMedication]);
+
+    console.log(currentMedicationList);
   };
 
   const deleteMedication = (medicationToBeDeleted: string): void => {
