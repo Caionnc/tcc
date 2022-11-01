@@ -25,31 +25,24 @@ interface MedicationModalProps {
 
 const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
   const dispatch = useDispatch();
-  const currentMedicationName = useSelector(
-    ({ medication }: RootState) => medication.name,
-  );
-  const currentMedicationFrequency = useSelector(
-    ({ medication }: RootState) => medication.frequency,
-  );
-  const currentMedicationDuration = useSelector(
-    ({ medication }: RootState) => medication.duration,
-  );
-  const currentMedicationObservations = useSelector(
-    ({ medication }: RootState) => medication.observation,
+
+  const currentMedication = useSelector(
+    ({ medication }: RootState) => medication.currentMedication,
   );
 
   const [medicationData, setMedicationData] = useState<string[]>([]);
   const [medicationName, setMedicationName] = useState<string>(
-    currentMedicationName,
+    currentMedication.name,
   );
+
   const [medicationFrequency, setMedicationFrequency] = useState<string>(
-    currentMedicationFrequency,
+    currentMedication.frequency,
   );
   const [medicationDuration, setMedicationDuration] = useState<string>(
-    currentMedicationDuration,
+    currentMedication.duration,
   );
   const [medicationObservations, setMedicationObservations] = useState<string>(
-    currentMedicationObservations,
+    currentMedication.observation,
   );
 
   const closeModal = () => {
@@ -61,10 +54,10 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
   }, [setShow]);
 
   const handleSaveData = () => {
-    dispatch(Creators.setCurrentMedicationName(medicationName));
-    dispatch(Creators.setCurrentMedicationFrequency(medicationFrequency));
-    dispatch(Creators.setCurrentMedicationDuration(medicationDuration));
-    dispatch(Creators.setCurrentMedicationObservations(medicationObservations));
+    // dispatch(Creators.setCurrentMedicationName(medicationName));
+    // dispatch(Creators.setCurrentMedicationFrequency(medicationFrequency));
+    // dispatch(Creators.setCurrentMedicationDuration(medicationDuration));
+    // dispatch(Creators.setCurrentMedicationObservations(medicationObservations));
 
     setMedicationData([
       ...medicationData,
@@ -75,6 +68,14 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
         medicationObservations
       }`,
     ]);
+
+    dispatch(
+      Creators.editMedication({
+        id: currentMedication.id,
+        medication: { ...currentMedication, name: medicationName, frequency: medicationFrequency },
+      }),
+    );
+    setShow(false);
   };
 
   return (

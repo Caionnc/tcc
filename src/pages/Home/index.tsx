@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+import { uuid } from 'uuidv4';
 import {
   IonChip,
   IonContent,
@@ -35,9 +36,9 @@ import { RootState } from 'store';
 import { Strings } from './strings';
 
 import './styles.css';
-import { Medication } from 'components';
+import { MedicationComponent } from 'components';
 import { addMedicationImg } from 'assets';
-import { Creators } from 'store/ducks/medication';
+import { Creators, Medication } from 'store/ducks/medication';
 
 const playerService = PlayerService.getService();
 
@@ -63,29 +64,29 @@ function HomePage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const currentMedicationId = useSelector(
-    ({ medication }: RootState) => medication.id,
-  );
+  // const currentMedicationId = useSelector(
+  //   ({ medication }: RootState) => medication.id,
+  // );
 
-  const currentMedicationName = useSelector(
-    ({ medication }: RootState) => medication.name,
-  );
+  // const currentMedicationName = useSelector(
+  //   ({ medication }: RootState) => medication.name,
+  // );
 
-  const currentMedicationFrequency = useSelector(
-    ({ medication }: RootState) => medication.frequency,
-  );
+  // const currentMedicationFrequency = useSelector(
+  //   ({ medication }: RootState) => medication.frequency,
+  // );
 
-  const currentMedicationDuration = useSelector(
-    ({ medication }: RootState) => medication.duration,
-  );
+  // const currentMedicationDuration = useSelector(
+  //   ({ medication }: RootState) => medication.duration,
+  // );
 
-  const currentMedicationObservations = useSelector(
-    ({ medication }: RootState) => medication.observation,
-  );
+  // const currentMedicationObservations = useSelector(
+  //   ({ medication }: RootState) => medication.observation,
+  // );
 
-  const currentMedicationData = useSelector(
-    ({ medication }: RootState) => medication.medicationData,
-  );
+  // const currentMedicationData = useSelector(
+  //   ({ medication }: RootState) => medication.medicationData,
+  // );
 
   const currentMedicationList = useSelector(
     ({ medication }: RootState) => medication.medicationList,
@@ -98,107 +99,53 @@ function HomePage() {
   const [medicationList, setMedicationList] = useState<MedicationListState[]>(
     [],
   );
-  const [medicationName, setMedicationName] = useState<any>(
-    currentMedicationName,
-  );
-  const [medicationFrequency, setmedicationFrequency] = useState<any>(
-    currentMedicationFrequency,
-  );
-  const [medicationDuration, setMedicationDuration] = useState<any>(
-    currentMedicationDuration,
-  );
-  const [medicationObservations, setMedicationObervations] = useState<any>(
-    currentMedicationObservations,
-  );
+  // const [medicationName, setMedicationName] = useState<any>(
+  //   currentMedicationName,
+  // );
+  // const [medicationFrequency, setmedicationFrequency] = useState<any>(
+  //   currentMedicationFrequency,
+  // );
+  // const [medicationDuration, setMedicationDuration] = useState<any>(
+  //   currentMedicationDuration,
+  // );
+  // const [medicationObservations, setMedicationObervations] = useState<any>(
+  //   currentMedicationObservations,
+  // );
 
-  const [medicationListTest, setMedicationListTest] = useState<IMedication[]>(
-    [],
-  );
-  const [medicationNameTest, setMedicationNameTest] = useState<string>(
-    currentMedicationName,
-  );
-  const [medicationFrequencyTest, setmedicationFrequencyTest] = useState<any>(
-    currentMedicationFrequency,
-  );
-  const [medicationDurationTest, setMedicationDurationTest] = useState<any>(
-    currentMedicationDuration,
-  );
-  const [medicationObservationsTest, setMedicationDoObservations] =
-    useState<any>(currentMedicationObservations);
+  // const [medicationListTest, setMedicationListTest] = useState<IMedication[]>(
+  //   [],
+  // );
+  // const [medicationNameTest, setMedicationNameTest] = useState<string>(
+  //   currentMedicationName,
+  // );
+  // const [medicationFrequencyTest, setmedicationFrequencyTest] = useState<any>(
+  //   currentMedicationFrequency,
+  // );
+  // const [medicationDurationTest, setMedicationDurationTest] = useState<any>(
+  //   currentMedicationDuration,
+  // );
+  // const [medicationObservationsTest, setMedicationDoObservations] =
+  //   useState<any>(currentMedicationObservations);
+
+  const id = uuid();
+  const name = 'Nome';
+  const frequency = 'Frequência';
 
   //FIXED HOME MEDICATION
-  const testMedication = {
-    id: currentMedicationId,
-    name: currentMedicationName,
-    frequency: currentMedicationFrequency,
-    duration: currentMedicationDuration,
-    observation: currentMedicationObservations,
-    medicationData: `${
-      currentMedicationId +
-      ' ' +
-      currentMedicationName +
-      ' ' +
-      currentMedicationFrequency +
-      ' ' +
-      currentMedicationDuration +
-      ' ' +
-      currentMedicationObservations +
-      ' '
-    }`,
+  const testMedication: Medication = {
+    id: uuid(),
+    name: 'Nome',
+    frequency: 'Frequência',
+    duration: 'Duração',
+    observation: '',
   };
 
   const addMedication = (): void => {
-    const newMedication: MedicationListState = {
-      id: currentMedicationId,
-      name: currentMedicationName,
-      frequency: currentMedicationFrequency,
-      duration: currentMedicationDuration,
-      observation: currentMedicationObservations,
-      medicationData: `${
-        currentMedicationId +
-        ' ' +
-        currentMedicationName +
-        ' ' +
-        currentMedicationFrequency +
-        ' ' +
-        currentMedicationDuration +
-        ' ' +
-        currentMedicationObservations +
-        ' '
-      }`,
-    };
-
-    setMedicationName(currentMedicationName);
-    setmedicationFrequency(currentMedicationFrequency);
-    setMedicationDuration(currentMedicationDuration);
-    setMedicationObervations(currentMedicationObservations);
-    dispatch(Creators.setCurrentMedicationList(newMedication));
-    //only for test
-    setMedicationList([...medicationList, newMedication]);
-
-    console.log(currentMedicationList);
-    //console.log(medicationList);
+    dispatch(Creators.addMedication(testMedication));
   };
 
   const deleteMedication = (medicationToBeDeleted: string): void => {
-        //setMedicationList(currentMedicationList);
-        currentMedicationList.filter(medication => {
-          return medication.name !== medicationToBeDeleted;
-        });
-
-   /*  dispatch(
-      Creators.setCurrentMedicationList(
-        currentMedicationList.filter(medication => {
-          return medication.name !== medicationToBeDeleted;
-        }),
-      ),
-    ); */
-
-    /* setMedicationList(
-      medicationList.filter(medication => {
-        return medication.name !== medicationToBeDeleted;
-      }),
-    ); */
+    dispatch(Creators.deleteMedication(medicationToBeDeleted));
   };
 
   return (
@@ -209,20 +156,19 @@ function HomePage() {
       <IonContent class="home-container">
         <div className="home-content">
           <IonText class="home-content-title">Medicamentos</IonText>
-          <Medication
+          {/* <MedicationComponent
             medication={testMedication}
             deleteMedication={deleteMedication}
-          ></Medication>
+          ></MedicationComponent> */}
           <IonList class="home-medication-list">
-            {currentMedicationList.map(
-              (item: MedicationListState, key: number) => (
-                <Medication
-                  key={key}
-                  medication={item}
-                  deleteMedication={deleteMedication}
-                ></Medication>
-              ),
-            )}
+            {currentMedicationList.map((item: Medication, key: number) => (
+              <MedicationComponent
+                key={key}
+                medication={item}
+                deleteMedication={deleteMedication}
+                canDelete={key != 0}
+              ></MedicationComponent>
+            ))}
           </IonList>
         </div>
       </IonContent>

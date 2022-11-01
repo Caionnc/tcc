@@ -1,78 +1,55 @@
 /* eslint-disable no-param-reassign */
-import { stat } from 'fs';
 import produce, { Draft } from 'immer';
 import { Reducer } from 'redux';
 import { createAction, ActionType } from 'typesafe-actions';
 
 export const Types = {
-  SET_CURRENT_MEDICATION_ID: '@medication/SET_CURRENT_MEDICATION_NAME',
-  SET_CURRENT_MEDICATION_NAME: '@medication/SET_CURRENT_MEDICATION_NAME',
-  SET_CURRENT_MEDICATION_FREQUENCY:
-    '@medication/SET_CURRENT_MEDICATION_FREQUENCY',
-  SET_CURRENT_MEDICATION_DURATION:
-    '@medication/SET_CURRENT_MEDICATION_DURATION',
-  SET_CURRENT_MEDICATION_OBSERVATIONS:
-    '@medication/SET_CURRENT_MEDICATION_OBSERVATIONS',
-  SET_CURRENT_MEDICATION_DATA: '@medication/SET_CURRENT_MEDICATION_DATA',
-  //Medication List Getters and Setters
-  SET_CURRENT_MEDICATION_LIST: '@medication/SET_CURRENT_MEDICATION_LIST',
-  GET_CURRENT_MEDICATION_LIST: '@medication/GET_CURRENT_MEDICATION_LIST',
+  ADD_MEDICATION: '@medication/ADD_MEDICATION',
+  SET_CURRENT_MEDICATION: '@medication/SET_CURRENT_MEDICATION',
+  DELETE_MEDICATION: '@medication/DELETE_MEDICATION',
+  EDIT_MEDICATION: '@medication/EDIT_MEDICATION',
 };
 
-export interface MedicationState {
-  id: number;
+export interface Medication {
+  id: string;
   name: string;
   frequency: string;
   duration: string;
   observation: string;
-  medicationData: string;
-  medicationList: MedicationListState[];
+  medicationData?: string;
 }
 
-export interface MedicationListState {
-  id: number;
-  name: string;
-  frequency: string;
-  duration: string;
-  observation: string;
-  medicationData: string;
+export interface MedicationState {
+  currentMedication: Medication;
+  medicationList: Medication[];
+  translateMedication: '',
 }
 
 const INITIAL_STATE: MedicationState = {
-  id: 0,
-  name: 'Nome do remedio',
-  frequency: 'Frequência',
-  duration: 'Duração',
-  observation: 'Observações',
-  medicationData: '',
-  medicationList: [],
+  currentMedication: {} as Medication,
+  medicationList: [
+    {
+      id: 'xx',
+      name: 'Nome',
+      frequency: 'frquencia',
+      duration: 'dd',
+      observation: '',
+      medicationData: '',
+    },
+  ],
+  translateMedication: '',
 };
 
 export const Creators = {
-  setCurrentMedicationId: createAction(
-    Types.SET_CURRENT_MEDICATION_ID,
-  )<any>(),
-  setCurrentMedicationName: createAction(
-    Types.SET_CURRENT_MEDICATION_NAME,
-  )<string>(),
-  setCurrentMedicationFrequency: createAction(
-    Types.SET_CURRENT_MEDICATION_FREQUENCY,
-  )<string>(),
-  setCurrentMedicationDuration: createAction(
-    Types.SET_CURRENT_MEDICATION_DURATION,
-  )<string>(),
-  setCurrentMedicationObservations: createAction(
-    Types.SET_CURRENT_MEDICATION_OBSERVATIONS,
-  )<string>(),
-  setCurrentMedicationData: createAction(
-    Types.SET_CURRENT_MEDICATION_DATA,
-  )<string>(),
-  setCurrentMedicationList: createAction(
-    Types.SET_CURRENT_MEDICATION_LIST,
-  )<any>(),
-  /* getCurrentMedicationList: createAction(Types.GET_CURRENT_MEDICATION_LIST)<
-    IMedication[]
-  >(), */
+  addMedication: createAction(Types.ADD_MEDICATION)<Medication>(),
+  setCurrentMedication: createAction(
+    Types.SET_CURRENT_MEDICATION,
+  )<Medication>(),
+  deleteMedication: createAction(Types.DELETE_MEDICATION)<string>(),
+  editMedication: createAction(Types.EDIT_MEDICATION)<{
+    id: string;
+    medication: Medication;
+  }>(),
 };
 
 export type ActionTypes = ActionType<typeof Creators>;
@@ -84,41 +61,47 @@ const reducer: Reducer<MedicationState, ActionTypes> = (
   const { payload, type } = action;
   return produce(state, (draft: Draft<MedicationState>) => {
     switch (type) {
-      case Types.SET_CURRENT_MEDICATION_ID:
-        draft.id = payload;
-        break;
-      case Types.SET_CURRENT_MEDICATION_NAME:
-        draft.name = payload;
-        break;
-      case Types.SET_CURRENT_MEDICATION_FREQUENCY:
-        draft.frequency = payload;
-        break;
-      case Types.SET_CURRENT_MEDICATION_DURATION:
-        draft.duration = payload;
-        break;
-      case Types.SET_CURRENT_MEDICATION_OBSERVATIONS:
-        draft.observation = payload;
-        break;
-      case Types.SET_CURRENT_MEDICATION_DATA:
-        draft.medicationData = payload;
-        break;
-      case Types.SET_CURRENT_MEDICATION_LIST:
-        draft.medicationList = [...draft.medicationList, payload];
+      case Types.SET_CURRENT_MEDICATION:
+        draft.currentMedication = payload as Medication;
         break;
 
-      /* case Types.GET_CURRENT_MEDICATION_LIST:
-        draft.medicationList.map((item: IMedication, key: number) =>
-          console.log(
-            'Medication List Key' + key + '\n',
-            'Medication List Name' + draft.medicationList[key].name + '\n',
-            'Medication List Name' + draft.medicationList[key].frequency + '\n',
-            'Medication List Name' + draft.medicationList[key].duration + '\n',
-            'Medication List Name' +
-              draft.medicationList[key].observations +
-              '\n',
-          ),
+      case Types.DELETE_MEDICATION:
+        const medicationList = draft.medicationList.filter(
+          medication => medication.id !== payload,
         );
-        break; */
+        draft.medicationList = medicationList;
+        break;
+
+      case Types.ADD_MEDICATION:
+        const medication = payload as Medication;
+
+        draft.medicationList = [
+          ...draft.medicationList,
+          {
+            ...medication,
+            medicationData: `${
+              medication.id +
+              ' ' +
+              medication.name +
+              ' ' +
+              medication.frequency +
+              ' ' +
+              medication.duration +
+              ' ' +
+              medication.observation +
+              ' '
+            }`,
+          },
+        ];
+        break;
+
+      case Types.EDIT_MEDICATION:
+        const data = payload as { id: string; medication: Medication };
+        const index = draft.medicationList.findIndex(
+          element => element.id == data.id,
+        );
+        draft.medicationList[index] = data.medication;
+        break;
 
       default:
         break;
