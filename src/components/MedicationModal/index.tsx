@@ -72,7 +72,13 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
     dispatch(
       Creators.editMedication({
         id: currentMedication.id,
-        medication: { ...currentMedication, name: medicationName, frequency: medicationFrequency },
+        medication: {
+          ...currentMedication,
+          name: medicationName,
+          frequency: medicationFrequency,
+          duration: medicationDuration,
+          observation: medicationObservations,
+        },
       }),
     );
     setShow(false);
@@ -107,9 +113,9 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
             //setMedicationName(e.detail.value || '')
           />
           <IonText class="medication-modal-selection-boxes-title">
-            {medicationName}
+            Nome do Remédio
           </IonText>
-          <SelectMedicationFrequency></SelectMedicationFrequency>
+          <SelectMedicationFrequency value='' selectedOption=''></SelectMedicationFrequency>
           <IonText class="medication-modal-selection-boxes-title">
             Duração do tratamento
           </IonText>
