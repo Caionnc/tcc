@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonList, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
-import { medicationFrequency } from 'assets/json/index';
+import { frequencyOptions } from 'assets/json/index';
 
 interface SelectMedicationDurationProps {
   value: string;
@@ -14,7 +14,7 @@ function SelectMedicationDuration() {
     <IonList>
       <IonItem>
         <IonSelect interface="popover" placeholder={'Duração'}>
-          {medicationFrequency.map(item => {
+          {frequencyOptions.map(item => {
             return renderMedication(item);
           })}
         </IonSelect>

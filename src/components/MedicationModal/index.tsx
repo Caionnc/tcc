@@ -7,16 +7,19 @@ import {
   IonChip,
   IonTextarea,
   IonSearchbar,
+  IonSelectOption,
+  IonItem,
+  IonList,
+  IonSelect,
 } from '@ionic/react';
 
 import { IconCloseCircle } from 'assets';
 
 import './styles.css';
-import SelectMedicationDuration from 'components/SelectMedicationDuration';
 import { RootState } from 'store';
 import { Creators } from 'store/ducks/medication';
 import { current } from 'immer';
-import SelectMedicationFrequency from 'components/SelectMedicationFrequency';
+import { frequencyOptions, durationOptions } from 'assets/json/index';
 
 interface MedicationModalProps {
   show: any;
@@ -84,6 +87,14 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
     setShow(false);
   };
 
+  const renderFrequencyOptions = (item: string) => (
+    <IonSelectOption value={item}>{item}</IonSelectOption>
+  );
+
+  const renderDurationOptions = (item: string) => (
+    <IonSelectOption value={item}>{item}</IonSelectOption>
+  );
+
   return (
     <div>
       <IonModal
@@ -115,11 +126,39 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
           <IonText class="medication-modal-selection-boxes-title">
             Nome do Remédio
           </IonText>
-          <SelectMedicationFrequency value='' selectedOption=''></SelectMedicationFrequency>
+          <IonList>
+            <IonItem>
+              <IonSelect
+                interface="popover"
+                placeholder={'Frequência'}
+                onIonChange={ev =>
+                  setMedicationFrequency(JSON.stringify(ev.detail.value))
+                }
+              >
+                {frequencyOptions.map(item => {
+                  return renderFrequencyOptions(item.value);
+                })}
+              </IonSelect>
+            </IonItem>
+          </IonList>
           <IonText class="medication-modal-selection-boxes-title">
             Duração do tratamento
           </IonText>
-          <SelectMedicationDuration></SelectMedicationDuration>
+          <IonList>
+            <IonItem>
+              <IonSelect
+                interface="popover"
+                placeholder={'Duração'}
+                onIonChange={ev =>
+                  setMedicationDuration(JSON.stringify(ev.detail.value))
+                }
+              >
+                {durationOptions.map(item => {
+                  return renderDurationOptions(item.value);
+                })}
+              </IonSelect>
+            </IonItem>
+          </IonList>
           <IonText class="medication-modal-selection-boxes-title">
             Orientações importantes
           </IonText>
@@ -134,9 +173,6 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
           />
         </div>
         <IonChip onClick={handleSaveData}>Salvar</IonChip>
-        <IonText class="medication-modal-selection-boxes-title">
-          {medicationData}
-        </IonText>
       </IonModal>
     </div>
   );

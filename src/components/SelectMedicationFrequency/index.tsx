@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IonList, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
-import { medicationFrequency } from 'assets/json/index';
+import { frequencyOptions } from 'assets/json/index';
 
 interface SelectMedicationFrequencyProps {
   value: string;
@@ -21,7 +21,7 @@ function SelectMedicationFrequency(value: SelectMedicationFrequencyProps) {
           placeholder={'Frequência'}
           onIonChange={ev => setfrequency(JSON.stringify(ev.detail.value))}
         >
-          {medicationFrequency.map(item => {
+          {frequencyOptions.map(item => {
             return renderMedication(item.value);
           })}
         </IonSelect>

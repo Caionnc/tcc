@@ -10,6 +10,5 @@ export { default as MedicationComponent } from './Medication';
 export { default as MedicationList } from './MedicationList';
 export { default as MedicationModal } from './MedicationModal';
 export { default as SelectMedication } from './SelectMedication';
-export { default as SelectMedicationDosage } from './SelectMedicationDosage '
 export { default as SelectMedicationDuration } from './SelectMedicationDuration'
 export { default as SelectMedicationFrequency } from './SelectMedicationFrequency'
