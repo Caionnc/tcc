@@ -20,6 +20,9 @@ import { RootState } from 'store';
 import { Creators } from 'store/ducks/medication';
 import { current } from 'immer';
 import { frequencyOptions, durationOptions } from 'assets/json/index';
+import { PlayerKeys } from 'constants/player';
+import PlayerService from 'services/unity';
+import { useTranslation } from 'hooks/Translation';
 
 interface MedicationModalProps {
   show: any;
@@ -28,6 +31,7 @@ interface MedicationModalProps {
 
 const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
   const dispatch = useDispatch();
+  const playerService = PlayerService.getService();
 
   const currentMedication = useSelector(
     ({ medication }: RootState) => medication.currentMedication,
@@ -94,6 +98,28 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
   const renderDurationOptions = (item: string) => (
     <IonSelectOption value={item}>{item}</IonSelectOption>
   );
+
+  const { textPtBr, textGloss, setTextGloss } = useTranslation();
+  // Aux var for the TextArea value
+  const [auxValueText, setAuxValueText] = useState(textGloss);
+  const [isPreview, setIsPreview] = useState(false);
+
+  const handleCloseModal = () => {
+    setShow(false);
+    setIsPreview(false);
+    setAuxValueText('');
+  };
+
+  const handlePlaySuggestionGlosa = () => {
+    setShow(false);
+    // setTextGloss(auxValueText, false);
+    playerService.send(
+      PlayerKeys.PLAYER_MANAGER,
+      PlayerKeys.PLAY_NOW,
+      auxValueText,
+    );
+    setIsPreview(true);
+  };
 
   return (
     <div>
