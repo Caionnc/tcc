@@ -152,9 +152,9 @@ function Player() {
       setHasFinished(true);
     }
   };
-
+  //PATH HOME no original
   useEffect(() => {
-    if (location.pathname === paths.HOME) resetTranslation();
+    if (location.pathname === paths.TRANSLATING) resetTranslation();
   }, [location]);
 
   window.CounterGloss = (counter: number, glossLength: number) => {
