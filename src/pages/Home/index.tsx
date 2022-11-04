@@ -60,72 +60,21 @@ export interface MedicationListState {
 
 function HomePage() {
   const [searchText, setSearchText] = useState('');
+  const { textPtBr, textGloss, setTextGloss } = useTranslation();
+  const [auxValueText, setAuxValueText] = useState<any>(' ');
+
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
-
-  // const currentMedicationId = useSelector(
-  //   ({ medication }: RootState) => medication.id,
-  // );
-
-  // const currentMedicationName = useSelector(
-  //   ({ medication }: RootState) => medication.name,
-  // );
-
-  // const currentMedicationFrequency = useSelector(
-  //   ({ medication }: RootState) => medication.frequency,
-  // );
-
-  // const currentMedicationDuration = useSelector(
-  //   ({ medication }: RootState) => medication.duration,
-  // );
-
-  // const currentMedicationObservations = useSelector(
-  //   ({ medication }: RootState) => medication.observation,
-  // );
-
-  // const currentMedicationData = useSelector(
-  //   ({ medication }: RootState) => medication.medicationData,
-  // );
 
   const currentMedicationList = useSelector(
     ({ medication }: RootState) => medication.medicationList,
   );
 
-  //Medication Modal
-  //const [showModal, setShowModal] = useState(false);
-
   //Medication List state
   const [medicationList, setMedicationList] = useState<MedicationListState[]>(
     [],
   );
-  // const [medicationName, setMedicationName] = useState<any>(
-  //   currentMedicationName,
-  // );
-  // const [medicationFrequency, setmedicationFrequency] = useState<any>(
-  //   currentMedicationFrequency,
-  // );
-  // const [medicationDuration, setMedicationDuration] = useState<any>(
-  //   currentMedicationDuration,
-  // );
-  // const [medicationObservations, setMedicationObervations] = useState<any>(
-  //   currentMedicationObservations,
-  // );
-
-  // const [medicationListTest, setMedicationListTest] = useState<IMedication[]>(
-  //   [],
-  // );
-  // const [medicationNameTest, setMedicationNameTest] = useState<string>(
-  //   currentMedicationName,
-  // );
-  // const [medicationFrequencyTest, setmedicationFrequencyTest] = useState<any>(
-  //   currentMedicationFrequency,
-  // );
-  // const [medicationDurationTest, setMedicationDurationTest] = useState<any>(
-  //   currentMedicationDuration,
-  // );
-  // const [medicationObservationsTest, setMedicationDoObservations] =
-  //   useState<any>(currentMedicationObservations);
 
   const id = uuid();
   const name = 'Nome';
@@ -146,6 +95,36 @@ function HomePage() {
 
   const deleteMedication = (medicationToBeDeleted: string): void => {
     dispatch(Creators.deleteMedication(medicationToBeDeleted));
+  };
+
+
+  const handleMedicationData = () :any =>{
+    console.log(currentMedicationList.map((item: Medication, key: number) => {
+      return item.id + item.medicationData;
+    }))
+    console.log(currentMedicationList.map((item: Medication, key: number) => {
+      return item.name;
+    }))
+  }
+
+  const handlePlayTranslation = () => {
+    setAuxValueText(
+      currentMedicationList.map(item => {
+        return item.medicationData;
+      }),
+    );
+    console.log(
+      currentMedicationList.map(item => {
+        return item.medicationData;
+      }),
+    );
+    history.replace(paths.TRANSLATING);
+    // setTextGloss(auxValueText, false);
+    playerService.send(
+      PlayerKeys.PLAYER_MANAGER,
+      PlayerKeys.PLAY_NOW,
+      auxValueText,
+    );
   };
 
   return (
@@ -178,9 +157,7 @@ function HomePage() {
         </button>
       </div>
       <IonFooter class="home-bottom-container">
-        <IonButton onClick={() => console.log('Traduzir bundle')}>
-          Traduzir
-        </IonButton>
+        <IonButton onClick={handleMedicationData}>Traduzir</IonButton>
       </IonFooter>
     </MenuLayout>
   );

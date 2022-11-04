@@ -154,7 +154,7 @@ function Player() {
   };
   //PATH HOME no original
   useEffect(() => {
-    if (location.pathname === paths.TRANSLATING) resetTranslation();
+    if (location.pathname === paths.HOME) resetTranslation();
   }, [location]);
 
   window.CounterGloss = (counter: number, glossLength: number) => {
