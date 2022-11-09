@@ -8,7 +8,6 @@ import {
   IonContent,
   IonTextarea,
 } from '@ionic/react';
-import { medicationName } from 'assets/json/index';
 
 interface SelectMedicationProps {
   name: string;
@@ -31,13 +30,3 @@ function SelectMedication() {
   );
 }
 export default SelectMedication;
-
-{
-  /* <IonItem>
-        <IonSelect interface="popover" placeholder={'Medicamento'}>
-          {medicationName.map(item => {
-            return renderMedication(item);
-          })}
-        </IonSelect>
-      </IonItem> */
-}

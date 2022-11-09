@@ -53,6 +53,7 @@
     "typesafe-actions": "^5.1.0",
     "typescript": "^4.1.3",
     "uuid": "^8.3.2",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.4",
     "workbox-broadcast-update": "^5.1.4",

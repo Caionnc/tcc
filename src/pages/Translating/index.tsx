@@ -6,10 +6,14 @@ import { MenuLayout } from 'layouts';
 import { Strings } from './strings';
 
 import './styles.css';
+import { useLocation } from 'react-router';
+import paths from 'constants/paths';
 
 function Translating() {
+  const location = useLocation();
+
   return (
-    <MenuLayout title={Strings.TOOLBAR_TITLE}>
+    <MenuLayout title={Strings.TOOLBAR_TITLE} mode="back">
       <Player />
     </MenuLayout>
   );

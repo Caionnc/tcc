@@ -152,7 +152,7 @@ function Player() {
       setHasFinished(true);
     }
   };
-
+  //PATH HOME no original
   useEffect(() => {
     if (location.pathname === paths.HOME) resetTranslation();
   }, [location]);

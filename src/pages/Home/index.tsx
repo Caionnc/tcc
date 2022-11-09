@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+import { uuid } from 'uuidv4';
 import {
   IonChip,
   IonContent,
@@ -15,7 +16,7 @@ import {
   IonButton,
   IonFooter,
 } from '@ionic/react';
-import { debounce } from 'lodash';
+import { debounce, indexOf } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 
@@ -31,78 +32,129 @@ import { MenuLayout } from 'layouts';
 import { Words } from 'models/dictionary';
 import PlayerService from 'services/unity';
 import { RootState } from 'store';
-import { Creators } from 'store/ducks/dictionary';
 
 import { Strings } from './strings';
 
 import './styles.css';
-import { Medication } from 'components';
-import { logoAddPillIconAllBlue } from 'assets';
+import { MedicationComponent } from 'components';
+import { addMedicationImg, IconHandsTranslate } from 'assets';
+import { Creators, Medication } from 'store/ducks/medication';
+import translate from 'services/translate';
 
 const playerService = PlayerService.getService();
 
 export interface IMedication {
   name: any;
-  quantity: any;
-  period: any;
-  dosage: any;
+  frequency: any;
+  duration: any;
+  observations: any;
+}
+
+export interface MedicationListState {
+  id: number;
+  name: string;
+  frequency: string;
+  duration: string;
+  observation: string;
+  medicationData: string;
 }
 
 function HomePage() {
   const [searchText, setSearchText] = useState('');
+  const { textPtBr, textGloss, setTextGloss } = useTranslation();
+  const [auxValueText, setAuxValueText] = useState<any>(textGloss);
+
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
+  const TIME_DEBOUNCE_MS = 1000;
 
-  //Medication Modal
-  //const [showModal, setShowModal] = useState(false);
+  const currentMedicationList = useSelector(
+    ({ medication }: RootState) => medication.medicationList,
+  );
 
   //Medication List state
-  const [medicationList, setMedicationList] = useState<IMedication[]>([]);
-  const [medicationName, setMedicationName] = useState<any>('');
-  const [medicationQuantity, setMedicationQuantity] = useState<any>(0);
-  const [medicationPeriod, setMedicationPeriod] = useState<any>('');
-  const [medicationDosage, setMedicationDosage] = useState<any>(0);
-
-  const [medicationListTest, setMedicationListTest] = useState<IMedication[]>(
+  const [medicationList, setMedicationList] = useState<MedicationListState[]>(
     [],
   );
-  const [medicationNameTest, setMedicationNameTest] = useState<any>('');
-  const [medicationQuantityTest, setMedicationQuantityTest] = useState<any>(0);
-  const [medicationPeriodTest, setMedicationPeriodTest] = useState<any>('');
-  const [medicationDosageTest, setMedicationDosageTest] = useState<any>(0);
 
-  const testMedication = {
-    name: medicationNameTest,
-    quantity: medicationQuantityTest,
-    period: medicationPeriodTest,
-    dosage: medicationDosageTest,
+  const id = uuid();
+  const name = 'Nome';
+  const frequency = 'Frequência';
+
+  //FIXED HOME MEDICATION
+  const testMedication: Medication = {
+    id: uuid(),
+    name: 'Nome',
+    frequency: 'Frequência',
+    duration: 'Duração',
+    observation: '',
   };
 
   const addMedication = (): void => {
-    const newMedication = {
-      name: medicationName,
-      quantity: medicationQuantity,
-      period: medicationPeriod,
-      dosage: medicationDosage,
-    };
-
-    setMedicationName('');
-    setMedicationQuantity(0);
-    setMedicationPeriod('');
-    setMedicationDosage(0);
-    setMedicationList([...medicationList, newMedication]);
-
-    console.log(medicationList);
+    dispatch(Creators.addMedication(testMedication));
   };
 
   const deleteMedication = (medicationToBeDeleted: string): void => {
-    setMedicationList(
-      medicationList.filter(medication => {
-        return medication.name !== medicationToBeDeleted;
-      }),
-    );
+    dispatch(Creators.deleteMedication(medicationToBeDeleted));
   };
+
+  const handlePlayTranslation = () => {
+    /* setAuxValueText(
+      currentMedicationList.map((item: Medication, key: number) => {
+        return (
+          item.name +
+          ' ' +
+          item.frequency +
+          item.duration +
+          ' ' +
+          item.observation
+        );
+      }).concat(auxValueText),
+    ); */
+
+    const bundleText = currentMedicationList.map(
+      (item: Medication, key: number) => {
+        return (
+          item.name +
+          ' ' +
+          item.frequency +
+          item.duration +
+          ' ' +
+          item.observation
+        );
+      },
+    );
+
+    const textToTranslate = bundleText.join();
+    console.log(textToTranslate);
+
+    setAuxValueText(textToTranslate);
+    history.replace(paths.TRANSLATING);
+  };
+
+  /* const handleWordSuggestion = useCallback(
+    (word: string) => {
+      const text = auxValueText.split(' ');
+      console.log('text after creation' + text);
+      text.pop();
+      const gloss = text.join(' ').concat(` ${word}`);
+
+      // setTextGloss(gloss, false);
+      setAuxValueText(gloss);
+    },
+    [auxValueText],
+  ); */
+
+  useEffect(() => {
+    playerService.send(
+      PlayerKeys.PLAYER_MANAGER,
+      PlayerKeys.PLAY_NOW,
+      auxValueText,
+    );
+  }, [auxValueText]);
+
+  const debouncedSearch = debounce(handlePlayTranslation, TIME_DEBOUNCE_MS);
 
   return (
     <MenuLayout
@@ -112,33 +164,36 @@ function HomePage() {
       <IonContent class="home-container">
         <div className="home-content">
           <IonText class="home-content-title">Medicamentos</IonText>
-          <Medication
-            medication={
-              (testMedication.name,
-              testMedication.quantity,
-              testMedication.dosage,
-              testMedication.period)
-            }
+          {/* <MedicationComponent
+            medication={testMedication}
             deleteMedication={deleteMedication}
-          ></Medication>
+          ></MedicationComponent> */}
           <IonList class="home-medication-list">
-            {medicationList.map((item: IMedication, key: number) => (
-              <Medication
+            {currentMedicationList.map((item: Medication, key: number) => (
+              <MedicationComponent
                 key={key}
                 medication={item}
                 deleteMedication={deleteMedication}
-              ></Medication>
+                canDelete={key != 0}
+              ></MedicationComponent>
             ))}
           </IonList>
         </div>
       </IonContent>
-      <button className="home-add-medicine-button" onClick={addMedication}>
-        <img src={logoAddPillIconAllBlue}></img>
-      </button>
+      <div className="home-add-medication-div">
+        <button className="home-add-medicine-button" onClick={addMedication}>
+          <img src={addMedicationImg} alt="" />
+        </button>
+      </div>
       <IonFooter class="home-bottom-container">
-        <IonButton onClick={() => console.log('Traduzir bundle')}>
-          Traduzir
-        </IonButton>
+        <button
+          className="home-translator-button-save"
+          onClick={debouncedSearch}
+          type="button"
+        >
+          <IconHandsTranslate color="white" />
+          <span>Traduzir</span>
+        </button>
       </IonFooter>
     </MenuLayout>
   );

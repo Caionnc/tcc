@@ -57,6 +57,28 @@
   margin-bottom: -10px;
 }
 
+.medication-modal-observation-textarea {
+  border: 1px solid #bababa;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: Rawline;
+  z-index: 0;
+  font-style: italic;
+
+  --color: black;
+  --ion-color:var(black);
+}
+
+.medication-modal-observation-textarea.translator-textarea {
+  padding: 0px 15px;
+}
+
+.medication-modal-observation-textarea:hover {
+  --background: #fff5cc;
+  border: 1px solid #1447a6;
+}
+
 .item-native {
   padding: 0px;
 }
@@ -110,4 +132,3 @@
   padding-top: 0px;
   padding-left: 0px;
 }
-
