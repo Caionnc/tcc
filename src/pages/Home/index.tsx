@@ -37,8 +37,9 @@ import { Strings } from './strings';
 
 import './styles.css';
 import { MedicationComponent } from 'components';
-import { addMedicationImg } from 'assets';
+import { addMedicationImg, IconHandsTranslate } from 'assets';
 import { Creators, Medication } from 'store/ducks/medication';
+import translate from 'services/translate';
 
 const playerService = PlayerService.getService();
 
@@ -61,11 +62,12 @@ export interface MedicationListState {
 function HomePage() {
   const [searchText, setSearchText] = useState('');
   const { textPtBr, textGloss, setTextGloss } = useTranslation();
-  const [auxValueText, setAuxValueText] = useState<any>(' ');
+  const [auxValueText, setAuxValueText] = useState<any>(textGloss);
 
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
+  const TIME_DEBOUNCE_MS = 1000;
 
   const currentMedicationList = useSelector(
     ({ medication }: RootState) => medication.medicationList,
@@ -97,35 +99,62 @@ function HomePage() {
     dispatch(Creators.deleteMedication(medicationToBeDeleted));
   };
 
-
-  const handleMedicationData = () :any =>{
-    console.log(currentMedicationList.map((item: Medication, key: number) => {
-      return item.id + item.medicationData;
-    }))
-    console.log(currentMedicationList.map((item: Medication, key: number) => {
-      return item.name;
-    }))
-  }
-
   const handlePlayTranslation = () => {
-    setAuxValueText(
-      currentMedicationList.map(item => {
-        return item.medicationData;
-      }),
+    /* setAuxValueText(
+      currentMedicationList.map((item: Medication, key: number) => {
+        return (
+          item.name +
+          ' ' +
+          item.frequency +
+          item.duration +
+          ' ' +
+          item.observation
+        );
+      }).concat(auxValueText),
+    ); */
+
+    const bundleText = currentMedicationList.map(
+      (item: Medication, key: number) => {
+        return (
+          item.name +
+          ' ' +
+          item.frequency +
+          item.duration +
+          ' ' +
+          item.observation
+        );
+      },
     );
-    console.log(
-      currentMedicationList.map(item => {
-        return item.medicationData;
-      }),
-    );
+
+    const textToTranslate = bundleText.join();
+    console.log(textToTranslate);
+
+    setAuxValueText(textToTranslate);
     history.replace(paths.TRANSLATING);
-    // setTextGloss(auxValueText, false);
+  };
+
+  /* const handleWordSuggestion = useCallback(
+    (word: string) => {
+      const text = auxValueText.split(' ');
+      console.log('text after creation' + text);
+      text.pop();
+      const gloss = text.join(' ').concat(` ${word}`);
+
+      // setTextGloss(gloss, false);
+      setAuxValueText(gloss);
+    },
+    [auxValueText],
+  ); */
+
+  useEffect(() => {
     playerService.send(
       PlayerKeys.PLAYER_MANAGER,
       PlayerKeys.PLAY_NOW,
       auxValueText,
     );
-  };
+  }, [auxValueText]);
+
+  const debouncedSearch = debounce(handlePlayTranslation, TIME_DEBOUNCE_MS);
 
   return (
     <MenuLayout
@@ -157,7 +186,14 @@ function HomePage() {
         </button>
       </div>
       <IonFooter class="home-bottom-container">
-        <IonButton onClick={handleMedicationData}>Traduzir</IonButton>
+        <button
+          className="home-translator-button-save"
+          onClick={debouncedSearch}
+          type="button"
+        >
+          <IconHandsTranslate color="white" />
+          <span>Traduzir</span>
+        </button>
       </IonFooter>
     </MenuLayout>
   );

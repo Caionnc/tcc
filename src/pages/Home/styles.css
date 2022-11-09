@@ -39,7 +39,7 @@
 
 .home-bottom-container {
   justify-self: flex-end;
-  
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -67,7 +67,23 @@
   --background: #e5e5e5;
 }
 
-.list-md{
+.home-translator-button-save {
+  border-radius: 24px;
+  background-color: #1447a6;
+  border-radius: 24px;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  font-family: Rawline;
+  font-style: bold;
+  font-size: 16px;
+  line-height: 100%;
+}
+
+.list-md {
   background: transparent;
 }
 

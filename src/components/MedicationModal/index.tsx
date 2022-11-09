@@ -150,7 +150,7 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
             //setMedicationName(e.detail.value || '')
           />
           <IonText class="medication-modal-selection-boxes-title">
-            Nome do Remédio
+            Frequência do remédio
           </IonText>
           <IonList>
             <IonItem>

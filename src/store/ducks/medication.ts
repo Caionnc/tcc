@@ -33,7 +33,7 @@ const INITIAL_STATE: MedicationState = {
       name: 'Nome',
       frequency: 'Frequência',
       duration: 'Duração',
-      observation: '',
+      observation: 'Obs',
       medicationData: '',
     },
   ],
