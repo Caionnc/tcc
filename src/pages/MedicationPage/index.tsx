@@ -20,11 +20,6 @@ import { debounce, indexOf } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 
-import {
-  FIRST_PAGE_INDEX,
-  MAX_PER_PAGE,
-  PAGE_STEP_SIZE,
-} from 'constants/pagination';
 import paths from 'constants/paths';
 import { PlayerKeys } from 'constants/player';
 import { useTranslation } from 'hooks/Translation';

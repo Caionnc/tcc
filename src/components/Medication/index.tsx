@@ -36,7 +36,7 @@ const MedicationComponent = ({
         <IonText class="medication-texts-subtitle">
           {`${medication.frequency + ', '}` +
             `${medication.duration + ' e '}` +
-            `${medication.observation + ';'}`}
+            "Obs..."}
         </IonText>
       </div>
       <MedicationModal

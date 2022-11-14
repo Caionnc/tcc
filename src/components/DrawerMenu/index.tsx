@@ -27,6 +27,8 @@ import {
   IconDomain,
   IconCustomization,
   Vlibraslogo,
+  logoPills,
+  IconPill,
 } from 'assets';
 import { SVGProps } from 'assets/icons/types';
 import paths from 'constants/paths';
@@ -242,7 +244,7 @@ function DrawerMenu({ contentId }: DrawerMenuProps) {
           {renderItemTab(
             paths.MEDICATION,
             Strings.TITLE_MENU_MEDICATION,
-            IconTranslate,
+            IconPill,
             true,
           )}
         </IonList>

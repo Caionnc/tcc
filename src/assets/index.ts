@@ -28,6 +28,7 @@ import IconLeftArrow from './icons/IconLeftArrow';
 import IconYoutube from './icons/IconYoutube';
 import IconCamera from './icons/IconCamera';
 import IconPlay from './icons/IconPlay';
+import IconPill from './icons/IconPill';
 
 /* ----------------- Exports gifs -----------------------  */
 import gifStepZero from './gifs/passo0.gif';
@@ -235,5 +236,6 @@ export {
   IconYoutube,
   IconCamera,
   IconPlay,
+  IconPill,
   addMedicationImg,
 };
