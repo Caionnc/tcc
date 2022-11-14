@@ -228,7 +228,7 @@ function DrawerMenu({ contentId }: DrawerMenuProps) {
           </IonListHeader>
 
           {renderItemTab(
-            paths.HOME,
+            paths.TRANSLATING,
             Strings.TITLE_MENU_TRANSLATOR,
             IconTranslate,
             true,
@@ -237,6 +237,12 @@ function DrawerMenu({ contentId }: DrawerMenuProps) {
             paths.DICTIONARY,
             Strings.TITLE_MENU_DICTIONARY,
             IconDictionary,
+            true,
+          )}
+          {renderItemTab(
+            paths.MEDICATION,
+            Strings.TITLE_MENU_MEDICATION,
+            IconTranslate,
             true,
           )}
         </IonList>

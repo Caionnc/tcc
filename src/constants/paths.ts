@@ -13,4 +13,5 @@ export default {
   SIGNALCAPTURE: '/signal-capture',
   CUSTOMIZATION: '/customization',
   TRANSLATING: '/translating',
+  MEDICATION: '/medication',
 };

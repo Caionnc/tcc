@@ -22,7 +22,9 @@ import {
   Customization,
   Tutorial,
   Translating,
+  MedicationPage,
 } from '../pages';
+import HomePage from 'pages/Home';
 
 const CONTENT_ID = '@vlibras/mobile';
 
@@ -54,6 +56,7 @@ function Routes() {
           <Route component={Dictionary} path={paths.DICTIONARY_PLAYER} />
           <Route component={Tutorial} path={paths.TUTORIAL} />
           <Route component={Translating} path={paths.TRANSLATING} />
+          <Route component={MedicationPage} path={paths.MEDICATION} />
         </IonRouterOutlet>
       </IonReactRouter>
     </BrowserRouter>
