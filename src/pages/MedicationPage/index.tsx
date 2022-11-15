@@ -111,11 +111,13 @@ function MedicationPage() {
     const bundleText = currentMedicationList.map(
       (item: Medication, key: number) => {
         return (
+          ' O remédio ' +
           item.name +
-          ' ' +
+          ' deve ser tomado ' +
           item.frequency +
+          '  durante ' +
           item.duration +
-          ' ' +
+          ' observando que deve ' +
           item.observation
         );
       },
@@ -125,7 +127,7 @@ function MedicationPage() {
     console.log(textToTranslate);
 
     setAuxValueText(textToTranslate);
-    history.replace(paths.TRANSLATING);
+    history.replace(paths.HOME);
   };
 
   /* const handleWordSuggestion = useCallback(

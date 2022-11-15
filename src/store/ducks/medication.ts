@@ -22,7 +22,7 @@ export interface Medication {
 export interface MedicationState {
   currentMedication: Medication;
   medicationList: Medication[];
-  translateMedication: '',
+  translateMedication: '';
 }
 
 const INITIAL_STATE: MedicationState = {
