@@ -13,7 +13,7 @@ function Translating() {
   const location = useLocation();
 
   return (
-    <MenuLayout title={Strings.TOOLBAR_TITLE} mode="back">
+    <MenuLayout title={Strings.TOOLBAR_TITLE} mode="menu">
       <Player />
     </MenuLayout>
   );

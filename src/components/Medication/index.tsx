@@ -1,7 +1,7 @@
 import { IonImg, IonText } from '@ionic/react';
 import { logoPills, IconCloseCircle } from 'assets';
 import MedicationModal from 'components/MedicationModal';
-import { IMedication, MedicationListState } from 'pages/Home';
+import { IMedication, MedicationListState } from 'pages/MedicationPage';
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Creators, Medication } from 'store/ducks/medication';
@@ -36,7 +36,7 @@ const MedicationComponent = ({
         <IonText class="medication-texts-subtitle">
           {`${medication.frequency + ', '}` +
             `${medication.duration + ' e '}` +
-            `${medication.observation + ';'}`}
+            "Obs..."}
         </IonText>
       </div>
       <MedicationModal

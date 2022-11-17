@@ -1,5 +1,5 @@
 export const Strings = {
-  TOOLBAR_TITLE: 'Tradutor',
+  TOOLBAR_TITLE: 'Medicamentos',
   DICTIONARY_TEXT_1: 'ACONSELHAR',
   DICTIONARY_TEXT_2: 'ACAUTELAR',
   DICTIONARY_TEXT_3: 'ACUAR',
