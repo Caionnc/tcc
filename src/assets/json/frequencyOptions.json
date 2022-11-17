@@ -1,22 +1,7 @@
 [
-  { "value": " Uma vez ao dia " },
-  { "value": " 2 vezes ao dia " },
-  { "value": " 3 vezes ao dia " },
-  { "value": " 4 vezes ao dia " },
-  { "value": " 5 vezes ao dia " },
-  { "value": " 6 vezes ao dia " },
-  { "value": " 7 vezes ao dia " },
-  { "value": " 8 vezes ao dia " },
-  { "value": " 9 vezes ao dia " },
-  { "value": " 10 vezes ao dia " },
-  { "value": " 11 vezes ao dia " },
-  { "value": " 12 vezes ao dia " },
-  { "value": " 13 vezes ao dia " },
-  { "value": " 14 vezes ao dia " },
-  { "value": " 15 vezes ao dia " },
-  { "value": " 16 vezes ao dia " },
-  { "value": " 18 vezes ao dia " },
-  { "value": " 19 vezes ao dia " },
-  { "value": " 20 vezes ao dia " },
-  { "value": " 21 vezes ao dia " }
+  { "value": " Uma vez ao dia de 24 em 24 horas " },
+  { "value": " 2 vezes ao dia de 12 em 12 horas " },
+  { "value": " 3 vezes ao dia de 8 em 8 horas " },
+  { "value": " 4 vezes ao dia de 6 em 6 horas " },
+  { "value": " 6 vezes ao dia de 4 em 4 horas" }
 ]

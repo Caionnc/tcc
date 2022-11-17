@@ -19,7 +19,11 @@ import './styles.css';
 import { RootState } from 'store';
 import { Creators } from 'store/ducks/medication';
 import { current } from 'immer';
-import { frequencyOptions, durationOptions } from 'assets/json/index';
+import {
+  frequencyOptions,
+  durationOptions,
+  orientationOptions,
+} from 'assets/json/index';
 import { PlayerKeys } from 'constants/player';
 import PlayerService from 'services/unity';
 import { useTranslation } from 'hooks/Translation';
@@ -99,6 +103,10 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
     <IonSelectOption value={item}>{item}</IonSelectOption>
   );
 
+  const renderOrientationOptions = (item: string) => (
+    <IonSelectOption value={item}>{item}</IonSelectOption>
+  );
+
   const { textPtBr, textGloss, setTextGloss } = useTranslation();
   // Aux var for the TextArea value
   const [auxValueText, setAuxValueText] = useState(textGloss);
@@ -150,7 +158,7 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
             //setMedicationName(e.detail.value || '')
           />
           <IonText class="medication-modal-selection-boxes-title">
-            Frequência de uso do remédio
+            Frequência de uso do medicamento
           </IonText>
           <IonList>
             <IonItem>
@@ -188,7 +196,23 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
           <IonText class="medication-modal-selection-boxes-title">
             Orientações importantes
           </IonText>
-          <IonTextarea
+          <IonList>
+            <IonItem>
+              <IonSelect
+                interface="popover"
+                multiple={true}
+                placeholder={'Orientações imporantes'}
+                onIonChange={ev =>
+                  setMedicationObservations(JSON.stringify(ev.detail.value))
+                }
+              >
+                {orientationOptions.map(item => {
+                  return renderOrientationOptions(item.value);
+                })}
+              </IonSelect>
+            </IonItem>
+          </IonList>
+          {/* <IonTextarea
             class="medication-modal-observation-textarea"
             placeholder={'Observações importantes!'}
             rows={2}
@@ -196,7 +220,7 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
             wrap="soft"
             required
             onIonChange={e => setMedicationObservations(e.detail.value || '')}
-          />
+          /> */}
         </div>
         <IonChip onClick={handleSaveData}>Salvar</IonChip>
       </IonModal>

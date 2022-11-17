@@ -67,7 +67,7 @@
   font-style: italic;
 
   --color: black;
-  --ion-color:var(black);
+  --ion-color: var(black);
 }
 
 .medication-modal-observation-textarea.translator-textarea {
@@ -79,14 +79,47 @@
   border: 1px solid #1447a6;
 }
 
+.alert-checkbox-label.sc-ion-alert-md {
+  white-space: normal !important;
+}
+
+.alert-checkbox-label.sc-ion-alert-ios {
+  white-space: normal !important;
+}
+
+/* Width das opções ->*/
+
+.sc-ion-alert-md-h {
+  --max-width: 380px;
+}
+
+.sc-ion-alert-ios-h {
+  --max-width: 380px;
+}
+
+.alert-tappable.sc-ion-alert-md {
+  height: 100px;
+  width: 380px;
+}
+
+.alert-tappable.sc-ion-alert-ios {
+  height: 100px;
+  width: 380px;
+}
+
+ion-select::part(text) {
+  white-space: normal !important;
+  transform: none !important;
+}
+
 .item-native {
   padding: 0px;
 }
 
 .evaluation-modal .modal-wrapper {
   border-radius: 8px;
-  height: 550px;
-  width: 300px;
+  height: 600px;
+  width: 320px;
 }
 
 .evaluation-modal .ion-page {

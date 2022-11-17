@@ -111,13 +111,13 @@ function MedicationPage() {
     const bundleText = currentMedicationList.map(
       (item: Medication, key: number) => {
         return (
-          ' O remédio ' +
+          ' O medicamento ' +
           item.name +
-          ' deve ser tomado ' +
+          ' ter que tomar ' +
           item.frequency +
           '  durante ' +
           item.duration +
-          ' observando que deve ' +
+          ' observando o seguinte ' +
           item.observation
         );
       },
