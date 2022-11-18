@@ -56,11 +56,12 @@ export interface MedicationListState {
 
 function MedicationPage() {
   const [searchText, setSearchText] = useState('');
-  const { textPtBr, textGloss, setTextGloss } = useTranslation();
-  const [auxValueText, setAuxValueText] = useState<any>(textGloss);
 
-  /* const [textToTranslate, setTextToTranslate] = useState<string>('');
-  const [formattedText, setFormattedText] = useState<string>(''); */
+  const [text, setText] = useState('');
+  const { textPtBr, textGloss, setTextGloss } = useTranslation();
+  const { setTextPtBr } = useTranslation();
+
+  const [auxValueText, setAuxValueText] = useState<any>(textGloss);
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -98,19 +99,6 @@ function MedicationPage() {
   };
 
   const handlePlayTranslation = () => {
-    /* setAuxValueText(
-      currentMedicationList.map((item: Medication, key: number) => {
-        return (
-          item.name +
-          ' ' +
-          item.frequency +
-          item.duration +
-          ' ' +
-          item.observation
-        );
-      }).concat(auxValueText),
-    ); */
-
     const bundleText = currentMedicationList.map(
       (item: Medication, key: number) => {
         return (
@@ -133,6 +121,35 @@ function MedicationPage() {
     setAuxValueText(textToTranslate);
     history.replace(paths.HOME);
   };
+
+  async function translate() {
+    const bundleText = currentMedicationList.map(
+      (item: Medication, key: number) => {
+        return (
+          ' O medicamento ' +
+          item.name +
+          ' ter que tomar ' +
+          item.frequency +
+          ' durante ' +
+          item.duration +
+          ' observando o seguinte ' +
+          item.observation
+        );
+      },
+    );
+
+    const textToTranslate = bundleText
+      .join()
+      .replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+    setText(textToTranslate);
+
+    const formatted = textToTranslate.trim();
+
+    const gloss = await setTextPtBr(formatted, false);
+
+    setAuxValueText(gloss);
+    history.replace(paths.HOME);
+  }
 
   /* const handleBundleToTranslation = () => {
     const bundleText = currentMedicationList.map(
@@ -180,7 +197,7 @@ function MedicationPage() {
     );
   }, [auxValueText]);
 
-  const debouncedSearch = debounce(handlePlayTranslation, TIME_DEBOUNCE_MS);
+  const debouncedSearch = debounce(translate, TIME_DEBOUNCE_MS);
 
   return (
     <MenuLayout
