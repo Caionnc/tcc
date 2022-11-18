@@ -110,6 +110,28 @@
 ion-select::part(text) {
   white-space: normal !important;
   transform: none !important;
+  max-height: 100px;
+}
+
+.sc-ion-label-md-h {
+  white-space: normal !important;
+  transform: none !important;
+  max-height: 100px;
+}
+
+.sc-ion-label-ios-h {
+  white-space: normal !important;
+  transform: none !important;
+  max-height: 100px;
+}
+
+.sc-ion-label-ios {
+  white-space: normal !important;
+  transform: none !important;
+  max-height: 100px;
+}
+.sc-ion-select-popover .sc-ion-label-md-h .sc-ion-label-md-s-md-hydrated {
+  white-space: normal !important;
 }
 
 .item-native {

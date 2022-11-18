@@ -32,7 +32,7 @@ import { Strings } from './strings';
 
 import './styles.css';
 import { MedicationComponent } from 'components';
-import { addMedicationImg, IconHandsTranslate } from 'assets';
+import { addMedicationImg, IconEdit, IconHandsTranslate } from 'assets';
 import { Creators, Medication } from 'store/ducks/medication';
 import translate from 'services/translate';
 
@@ -58,6 +58,9 @@ function MedicationPage() {
   const [searchText, setSearchText] = useState('');
   const { textPtBr, textGloss, setTextGloss } = useTranslation();
   const [auxValueText, setAuxValueText] = useState<any>(textGloss);
+
+  /* const [textToTranslate, setTextToTranslate] = useState<string>('');
+  const [formattedText, setFormattedText] = useState<string>(''); */
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -115,7 +118,7 @@ function MedicationPage() {
           item.name +
           ' ter que tomar ' +
           item.frequency +
-          '  durante ' +
+          ' durante ' +
           item.duration +
           ' observando o seguinte ' +
           item.observation
@@ -123,13 +126,39 @@ function MedicationPage() {
       },
     );
 
-    const textToTranslate = bundleText.join();
-    console.log(textToTranslate);
+    const textToTranslate = bundleText
+      .join()
+      .replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
 
     setAuxValueText(textToTranslate);
     history.replace(paths.HOME);
   };
 
+  /* const handleBundleToTranslation = () => {
+    const bundleText = currentMedicationList.map(
+      (item: Medication, key: number) => {
+        return (
+          ' O medicamento ' +
+          item.name +
+          ' ter que tomar ' +
+          item.frequency +
+          ' durante ' +
+          item.duration +
+          ' observando o seguinte ' +
+          item.observation
+        );
+      },
+    );
+    
+    const textToTranslate = bundleText
+    .join()
+    .replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+
+    const formattedText = textToTranslate.replace('"', ' ');
+    console.log(textToTranslate);
+    console.log(formattedText);
+  };
+ */
   /* const handleWordSuggestion = useCallback(
     (word: string) => {
       const text = auxValueText.split(' ');
