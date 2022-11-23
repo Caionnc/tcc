@@ -1,9 +1,9 @@
 [
-  { "value": " Tomar o medicamento em jejum, assim que acordar, então aguarde uma hora para refeição normal " },
+  { "value": " Deve tomar o medicamento ainda em jejum ao  acordar, então esperar uma hora para refeição. " },
   { "value": " Tomar o medicamento de estômago vazio, uma hora antes de se alimentar, e pelo menos duas horas depois da última refeição "},
   { "value": " Tomar o medicamento com o estômago cheio, junto com o alimento ou até uma hora depois "},
   { "value": " Tomar o medicamento ao deitar, fazer o uso de quinze a trinta minutos antes de deitar-se para dormir " },
-  { "value": " Tomar com um copo cheio de água "},
+  { "value": " Tomar o medicamento com um copo cheio de água "},
   { "value": " Não tape a área tratada, a não ser que tenha sido pedido "},
   { "value": " Não use grandes quantidade maiores que as prescritas " },
   { "value": " Caso esteja usando mais de um colírio, faça um pequeno intervalo de cinco minutos entre suas aplicações " },
@@ -15,6 +15,8 @@
   { "value": " Não tome o medicamento direto do frasco, com a boca" },
   { "value": " Não coloque água nem nenhum outro líquido no frasco" },
   { "value": " Despreze todo o medicamento que sobrar ao fim do tratamento" },
-  { "value": " Deixe o restante dentro do frasco e não descarte seu conteúdo em pias, vasoss sanitários, ralos ou no solo " }
-]
+  { "value": " Deixe o restante dentro do frasco e não descarte seu conteúdo em pias, vasoss sanitários, ralos ou no solo " },
+  [{ "value": " Deixe o restante dentro do frasco e não descarte seu conteúdo em pias, vasoss sanitários, ralos ou no solo "},
+  {"glosaText": ""}]]
+
 

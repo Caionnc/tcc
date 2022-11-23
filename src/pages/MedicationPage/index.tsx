@@ -104,7 +104,7 @@ function MedicationPage() {
         return (
           ' O medicamento ' +
           item.name +
-          ' ter que tomar ' +
+          ' deve ser tomado ' +
           item.frequency +
           ' durante ' +
           item.duration +
@@ -126,13 +126,13 @@ function MedicationPage() {
     const bundleText = currentMedicationList.map(
       (item: Medication, key: number) => {
         return (
-          ' O medicamento ' +
+          ' medicamento ' +
           item.name +
-          ' ter que tomar ' +
+          ' deve usar' +
           item.frequency +
           ' durante ' +
           item.duration +
-          ' observando o seguinte ' +
+          ' observando as recomendações ' +
           item.observation
         );
       },
@@ -146,6 +146,7 @@ function MedicationPage() {
     const formatted = textToTranslate.trim();
 
     const gloss = await setTextPtBr(formatted, false);
+    console.log(gloss);
 
     setAuxValueText(gloss);
     history.replace(paths.HOME);
