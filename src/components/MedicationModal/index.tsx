@@ -95,16 +95,20 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
     setShow(false);
   };
 
-  const renderFrequencyOptions = (item: string) => (
-    <IonSelectOption value={item}>{item}</IonSelectOption>
+  const renderFrequencyOptions = (item: string, glosa: string) => (
+    <IonSelectOption value={glosa}>{item}</IonSelectOption>
   );
 
   const renderDurationOptions = (item: string) => (
     <IonSelectOption value={item}>{item}</IonSelectOption>
   );
 
-  const renderOrientationOptions = (item: string) => (
+  /* const renderOrientationOptions = (item: string) => (
     <IonSelectOption value={item}>{item}</IonSelectOption>
+  ); */
+
+  const renderOrientationOptions = (item: string, glosa: string) => (
+    <IonSelectOption value={glosa}>{item}</IonSelectOption>
   );
 
   const { textPtBr, textGloss, setTextGloss } = useTranslation();
@@ -170,7 +174,7 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
                 }
               >
                 {frequencyOptions.map(item => {
-                  return renderFrequencyOptions(item.value);
+                  return renderFrequencyOptions(item.value, item.glosa);
                 })}
               </IonSelect>
             </IonItem>
@@ -207,7 +211,7 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
                 }
               >
                 {orientationOptions.map(item => {
-                  return renderOrientationOptions(item.value);
+                  return renderOrientationOptions(item.value, item.glosa);
                 })}
               </IonSelect>
             </IonItem>

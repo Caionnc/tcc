@@ -66,7 +66,7 @@ function MedicationPage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
-  const TIME_DEBOUNCE_MS = 1000;
+  const TIME_DEBOUNCE_MS = 500;
 
   const currentMedicationList = useSelector(
     ({ medication }: RootState) => medication.medicationList,
@@ -146,7 +146,6 @@ function MedicationPage() {
     const formatted = textToTranslate.trim();
 
     const gloss = await setTextPtBr(formatted, false);
-    console.log(gloss);
 
     setAuxValueText(gloss);
     history.replace(paths.HOME);
