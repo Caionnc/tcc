@@ -32,7 +32,7 @@ import { Strings } from './strings';
 
 import './styles.css';
 import { MedicationComponent } from 'components';
-import { addMedicationImg, IconHandsTranslate } from 'assets';
+import { addMedicationImg, IconEdit, IconHandsTranslate } from 'assets';
 import { Creators, Medication } from 'store/ducks/medication';
 import translate from 'services/translate';
 
@@ -56,13 +56,17 @@ export interface MedicationListState {
 
 function MedicationPage() {
   const [searchText, setSearchText] = useState('');
+
+  const [text, setText] = useState('');
   const { textPtBr, textGloss, setTextGloss } = useTranslation();
+  const { setTextPtBr } = useTranslation();
+
   const [auxValueText, setAuxValueText] = useState<any>(textGloss);
 
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
-  const TIME_DEBOUNCE_MS = 1000;
+  const TIME_DEBOUNCE_MS = 500;
 
   const currentMedicationList = useSelector(
     ({ medication }: RootState) => medication.medicationList,
@@ -95,41 +99,83 @@ function MedicationPage() {
   };
 
   const handlePlayTranslation = () => {
-    /* setAuxValueText(
-      currentMedicationList.map((item: Medication, key: number) => {
-        return (
-          item.name +
-          ' ' +
-          item.frequency +
-          item.duration +
-          ' ' +
-          item.observation
-        );
-      }).concat(auxValueText),
-    ); */
-
     const bundleText = currentMedicationList.map(
       (item: Medication, key: number) => {
         return (
-          ' O remédio ' +
+          ' O medicamento ' +
           item.name +
           ' deve ser tomado ' +
           item.frequency +
-          '  durante ' +
+          ' durante ' +
           item.duration +
-          ' observando que deve ' +
+          ' observando o seguinte ' +
           item.observation
         );
       },
     );
 
-    const textToTranslate = bundleText.join();
-    console.log(textToTranslate);
+    const textToTranslate = bundleText
+      .join()
+      .replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
 
     setAuxValueText(textToTranslate);
     history.replace(paths.HOME);
   };
 
+  async function translate() {
+    const bundleText = currentMedicationList.map(
+      (item: Medication, key: number) => {
+        return (
+          ' medicamento ' +
+          item.name +
+          ' deve usar' +
+          item.frequency +
+          ' durante ' +
+          item.duration +
+          ' observando as recomendações ' +
+          item.observation
+        );
+      },
+    );
+
+    const textToTranslate = bundleText
+      .join()
+      .replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+    setText(textToTranslate);
+
+    const formatted = textToTranslate.trim();
+
+    const gloss = await setTextPtBr(formatted, false);
+
+    setAuxValueText(gloss);
+    history.replace(paths.HOME);
+  }
+
+  /* const handleBundleToTranslation = () => {
+    const bundleText = currentMedicationList.map(
+      (item: Medication, key: number) => {
+        return (
+          ' O medicamento ' +
+          item.name +
+          ' ter que tomar ' +
+          item.frequency +
+          ' durante ' +
+          item.duration +
+          ' observando o seguinte ' +
+          item.observation
+        );
+      },
+    );
+    
+    const textToTranslate = bundleText
+    .join()
+    .replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+
+    const formattedText = textToTranslate.replace('"', ' ');
+    console.log(textToTranslate);
+    console.log(formattedText);
+  };
+ */
   /* const handleWordSuggestion = useCallback(
     (word: string) => {
       const text = auxValueText.split(' ');
@@ -151,7 +197,7 @@ function MedicationPage() {
     );
   }, [auxValueText]);
 
-  const debouncedSearch = debounce(handlePlayTranslation, TIME_DEBOUNCE_MS);
+  const debouncedSearch = debounce(translate, TIME_DEBOUNCE_MS);
 
   return (
     <MenuLayout

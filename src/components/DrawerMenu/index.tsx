@@ -230,7 +230,7 @@ function DrawerMenu({ contentId }: DrawerMenuProps) {
           </IonListHeader>
 
           {renderItemTab(
-            paths.TRANSLATING,
+            paths.TRANSLATOR,
             Strings.TITLE_MENU_TRANSLATOR,
             IconTranslate,
             true,
