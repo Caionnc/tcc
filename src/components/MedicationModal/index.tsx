@@ -18,7 +18,6 @@ import { IconCloseCircle } from 'assets';
 import './styles.css';
 import { RootState } from 'store';
 import { Creators } from 'store/ducks/medication';
-import { current } from 'immer';
 import {
   frequencyOptions,
   durationOptions,
