@@ -12,7 +12,7 @@ import {
 } from '@ionic/react';
 import { debounce } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import {
   FIRST_PAGE_INDEX,

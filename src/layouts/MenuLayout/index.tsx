@@ -28,6 +28,7 @@ type MODE = 'menu' | 'back';
 interface MenuLayoutProps {
   title: string;
   mode?: MODE;
+  children?: React.ReactNode;
 }
 
 const MenuLayout: React.FC<MenuLayoutProps> = ({
