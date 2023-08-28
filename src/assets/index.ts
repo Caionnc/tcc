@@ -28,6 +28,7 @@ import IconLeftArrow from './icons/IconLeftArrow';
 import IconYoutube from './icons/IconYoutube';
 import IconCamera from './icons/IconCamera';
 import IconPlay from './icons/IconPlay';
+import IconPill from './icons/IconPill';
 
 /* ----------------- Exports gifs -----------------------  */
 import gifStepZero from './gifs/passo0.gif';
@@ -46,7 +47,9 @@ import IconPauseOutlined from './icons/IconPauseOutlined';
 import IconThumbs from './icons/IconThumbs';
 
 /* ----------------- Exports images -----------------------  [MA] */
-
+import logoAddPillIconAllBlue from './images/addIconPillAllBlue.png';
+import logoAddPillIcon from './images/addPillIconBlue.png';
+import logoPills from './images/IconPills.png';
 import logoAcre from './images/Acre.png';
 import logoAlagoas from './images/Alagoas.png';
 import logoAmapa from './images/Amapá.png';
@@ -114,6 +117,7 @@ import logoCalca from './images/calça.png';
 import logoSubtitleOn from './images/subtitle-on.png';
 import logoSubtitleOff from './images/subtitle-off.png';
 import Vlibraslogo from './images/vlibraslogo.png';
+import addMedicationImg from './images/addMedicationImg.png';
 
 export { ReactComponent as IcaroAvatar } from './images/icaro.svg';
 export { ReactComponent as GugaAvatar } from './images/guga.svg';
@@ -121,6 +125,9 @@ export { ReactComponent as HozanaAvatar } from './images/hozana.svg';
 export { ReactComponent as ArrowLeft } from './images/arrow-left.svg';
 
 export {
+  logoAddPillIconAllBlue,
+  logoAddPillIcon,
+  logoPills,
   logoSubtitleOff,
   logoSubtitleOn,
   LogoIcaro,
@@ -229,4 +236,6 @@ export {
   IconYoutube,
   IconCamera,
   IconPlay,
+  IconPill,
+  addMedicationImg,
 };

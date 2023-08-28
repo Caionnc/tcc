@@ -21,14 +21,17 @@ import {
   RecorderArea,
   Customization,
   Tutorial,
+  Translating,
+  MedicationPage,
 } from '../pages';
+import HomePage from 'pages/Home';
 
 const CONTENT_ID = '@vlibras/mobile';
 
 function Routes() {
   document.addEventListener('ionBackButton', (ev: any) => {
     ev.detail.register(-1, () => {
-      if (window.location.pathname === '/') {
+      if (window.location.pathname === 'home') {
         App.exitApp();
       }
     });
@@ -52,6 +55,8 @@ function Routes() {
           <Route component={SignalCapture} path={paths.SIGNALCAPTURE} />
           <Route component={Dictionary} path={paths.DICTIONARY_PLAYER} />
           <Route component={Tutorial} path={paths.TUTORIAL} />
+          <Route component={Translating} path={paths.TRANSLATING} />
+          <Route component={MedicationPage} path={paths.MEDICATION} />
         </IonRouterOutlet>
       </IonReactRouter>
     </BrowserRouter>

@@ -12,4 +12,6 @@ export default {
   ONBOARDING: '/onboarding',
   SIGNALCAPTURE: '/signal-capture',
   CUSTOMIZATION: '/customization',
+  TRANSLATING: '/translating',
+  MEDICATION: '/medication',
 };

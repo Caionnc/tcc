@@ -1,0 +1,189 @@
+.evaluation-modal {
+  background: var(--ion-color-grey-65);
+  font-family: Rawline;
+}
+
+.medication-modal {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+  color: #000;
+  margin-left: 20px;
+  /**margin: 0 !important;*/
+  /* margin: -45px 0px 0px 0px; */
+  /*margin: 2px 0px -15px 0px;*/
+}
+
+.medication-modal-container-close-button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 8px;
+}
+
+.medication-modal-container-close-button-container button {
+  border: none;
+  background: none;
+}
+.hidden-span {
+  color: #ffffff;
+}
+
+.medication-modal-selection-boxes {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding: 15px;
+}
+/* .medication-modal-selection-boxes-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+} */
+
+.medication-modal-selection-boxes-title {
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 27px;
+  text-align: center;
+  color: #000;
+  margin-bottom: -10px;
+}
+
+.medication-modal-observation-textarea {
+  border: 1px solid #bababa;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: Rawline;
+  z-index: 0;
+  font-style: italic;
+
+  --color: black;
+  --ion-color: var(black);
+}
+
+.medication-modal-observation-textarea.translator-textarea {
+  padding: 0px 15px;
+}
+
+.medication-modal-observation-textarea:hover {
+  --background: #fff5cc;
+  border: 1px solid #1447a6;
+}
+
+.alert-checkbox-label.sc-ion-alert-md {
+  white-space: normal !important;
+}
+
+.alert-checkbox-label.sc-ion-alert-ios {
+  white-space: normal !important;
+}
+
+/* Width das opções ->*/
+
+.sc-ion-alert-md-h {
+  --max-width: 380px;
+}
+
+.sc-ion-alert-ios-h {
+  --max-width: 380px;
+}
+
+.alert-tappable.sc-ion-alert-md {
+  height: 100px;
+  width: 380px;
+}
+
+.alert-tappable.sc-ion-alert-ios {
+  height: 100px;
+  width: 380px;
+}
+
+ion-select::part(text) {
+  white-space: normal !important;
+  transform: none !important;
+  max-height: 100px;
+}
+
+.sc-ion-label-md-h {
+  white-space: normal !important;
+  transform: none !important;
+  max-height: 100px;
+}
+
+.sc-ion-label-ios-h {
+  white-space: normal !important;
+  transform: none !important;
+  max-height: 100px;
+}
+
+.sc-ion-label-ios {
+  white-space: normal !important;
+  transform: none !important;
+  max-height: 100px;
+}
+.sc-ion-select-popover .sc-ion-label-md-h .sc-ion-label-md-s-md-hydrated {
+  white-space: normal !important;
+}
+
+.item-native {
+  padding: 0px;
+}
+
+.evaluation-modal .modal-wrapper {
+  border-radius: 8px;
+  height: 600px;
+  width: 320px;
+}
+
+.evaluation-modal .ion-page {
+  padding: 16px 20px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.evaluation-modal .modal-title {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+  color: #000;
+  /* margin: -45px 0px 0px 0px; */
+  /*margin: 2px 0px -15px 0px;*/
+}
+
+.evaluation-modal .modal-desc {
+  color: var(--ion-color-modal-body);
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  margin: 20px 0px 0px 0px;
+}
+
+.evaluation-modal-container-close-button-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding-top: 8px;
+}
+
+.evaluation-modal-container-close-button-container button {
+  border: none;
+  background: none;
+}
+
+.evaluation-modal .ion-page {
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  padding-left: 0px;
+}

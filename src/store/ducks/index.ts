@@ -5,6 +5,7 @@ import dictionaryReducer from './dictionary';
 import regionalism from './regionalism';
 import translator from './translator';
 import video from './video';
+import medication from './medication';
 
 const reducers = combineReducers({
   regionalism,
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   dictionaryReducer,
   translator,
   customization,
+  medication,
 });
 
 export default reducers;
