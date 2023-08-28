@@ -18,7 +18,7 @@ import {
 } from '@ionic/react';
 import { debounce, indexOf } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import paths from 'constants/paths';
 import { PlayerKeys } from 'constants/player';

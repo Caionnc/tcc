@@ -6,7 +6,7 @@ import { MenuLayout } from 'layouts';
 import { Strings } from './strings';
 
 import './styles.css';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import paths from 'constants/paths';
 
 function Translating() {
