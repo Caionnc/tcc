@@ -166,8 +166,7 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
           <IonList>
             <IonItem>
               <IonSelect
-                interface="popover"
-                multiple={true}
+                multiple={false}
                 placeholder={'Frequência'}
                 onIonChange={ev =>
                   setMedicationFrequency(JSON.stringify(ev.detail.value))
@@ -185,8 +184,8 @@ const MedicationModal = ({ show, setShow }: MedicationModalProps) => {
           <IonList>
             <IonItem>
               <IonSelect
-                interface="popover"
-                multiple={true}
+                interfaceOptions={durationOptions}
+                multiple={false}
                 placeholder={'Duração'}
                 onIonChange={ev =>
                   setMedicationDuration(JSON.stringify(ev.detail.value))
